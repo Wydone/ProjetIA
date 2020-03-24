@@ -346,7 +346,6 @@ public class SquadroBoard implements IPartie2 {
 										}
 										
 									}
-									
 										
 								}else if( pieceCourante. getX() > 0 && pieceCourante.getStatut() =='R') {
 										
@@ -536,6 +535,7 @@ public class SquadroBoard implements IPartie2 {
 		
 	}
 
+	
 	//Retourne la liste des mouvement possible pour un joueur
 	@Override
 	public String[] possibleMoves(String player) {
@@ -549,219 +549,263 @@ public class SquadroBoard implements IPartie2 {
 				
 				PieceSquadro pieceCourrante =listJ1.get(i);
 				int deplacementCourant = pieceCourrante.getValeurDeplacement();
+
+				int colonneCourante = pieceCourrante.getX();
+
 				int valDeplacement = 0;
-			        
-				//Test si la piece est a l'allé
+ 
+				//Test si la pièce est à l'allée
 				if(pieceCourrante.getX() < 6 && pieceCourrante.getStatut() =='A') {
 
-					//Tant que la pi�ce doit avancer
+					//Tant que la pièce doit avancer
 					while(deplacementCourant > 0) {
 
 						//Elle avance d'une case
 						deplacementCourant --;
 						valDeplacement ++;
 								
-						int colonneCourante = pieceCourrante. getX() + valDeplacement;
-						char contenueCaseSuivane = this.board[ pieceCourrante.getY()][colonneCourante];
+						colonneCourante = pieceCourrante. getX() + valDeplacement;
+						char contenueCourante = this.board[ pieceCourrante.getY()][colonneCourante];
 
 						//Si cette case contient un .
-						if (contenueCaseSuivane == '.') {
+						if (contenueCourante == '.') {
 
-							//Si la pi�ce est sortie du plateau 
+							//Si la pièce est sortie du plateau 
 							if (colonneCourante == 6) {
 
-								//Elle arr�te d'avancer
+								//Elle arrète d'avancer
 								deplacementCourant = -1;
 							}
 									
-						//Si la case contient une pi�ce adverse	
-						}else if(contenueCaseSuivane == '^' || contenueCaseSuivane == 'V') {
-							//Elle avance d'une case en plus 
-							valDeplacement ++;
+							//Si la case contient une pièce adverse	
+						}else if(contenueCourante == '^' || contenueCourante == 'V') {
 									
-							//La pi�ce avance d'une case en plus tant qu'elle saute par dessus une pi�ce adverce
+							valDeplacement ++;
+
+							//La pièce avance d'une case en plus tant qu'elle saute par dessus une pièce adverce
 							do{
-								 //Si la pi�ce est sortie du plateau
-								 if (colonneCourante == 6) {
-										
-									 deplacementCourant = -1;
+
+								//Si la pièce est sortie du plateau
+								if (colonneCourante == 6) {
 												
-								 }
+									deplacementCourant = -1;
+												
+								}else {
+								
+									colonneCourante = pieceCourrante.getX() + valDeplacement;
+									contenueCourante = this.board[pieceCourrante.getY()][colonneCourante];
+									valDeplacement ++;
+								}
+											
+							}while((contenueCourante == '^' || contenueCourante == 'v') && deplacementCourant>=0);
+
+							//La pièce arrète son déplacement
+							deplacementCourant = -1;
+						}
+								
+					}
+							
+				}else if( pieceCourrante. getX() > 0 && pieceCourrante.getStatut() =='R') {
+						
+					//Tant que la pièce doit avancer
+					while(deplacementCourant > 0) {
+
+						//Elle avance d'une case
+						deplacementCourant --;
+						valDeplacement --;
+
+						colonneCourante = pieceCourrante. getX() + valDeplacement;
+						char contenueCaseSuivane = this.board[pieceCourrante.getY()][colonneCourante];
+								
+
+						if (contenueCaseSuivane == '.') {
+
+							//Si la pièce est sortie du plateau 
+							if (colonneCourante == 0) {
+
+								//Elle arrète d'avancer
+								deplacementCourant = -1;
+							}
+									
+						//Si la case contient une pièce adverse	
+						}else if(contenueCaseSuivane == '^' || contenueCaseSuivane == 'v') {
+									
+							//Elle avance d'une case en plus 
+							valDeplacement --;
+									
+							//La pièce avance d'une case en plus tant qu'elle saute par dessus une pièce adverce
+							do{
+								
+								valDeplacement --;
+
+								//Si la pièce est sortie du plateau
+								if (colonneCourante == 0) {
+												
+									deplacementCourant = -1;			
+								}
+											
+								colonneCourante = pieceCourrante. getX() + valDeplacement;
+								contenueCaseSuivane = this.board[pieceCourrante.getY()][colonneCourante];
+								valDeplacement --;
 											
 							}while((contenueCaseSuivane == '^' || contenueCaseSuivane == 'V') && deplacementCourant>=0);
 										
-							//La piece arrete son deplacement
+							//La pièce arrète son déplacement
 							deplacementCourant = -1;
 
 						}
+							
 					}
-					
-				}else if( pieceCourrante. getX() > 0 && pieceCourrante.getStatut() =='R') {
 						
-
-					//Tant que la piece doit avancer
-					while(deplacementCourant > 0) {
-							
-						//Elle avance d'une case
-						deplacementCourant --;
-						valDeplacement ++;
-
-						int colonneCourante = pieceCourrante. getX() - valDeplacement;
-						char contenueCaseSuivane = this.board[pieceCourrante.getY()][colonneCourante];
-								
-						if (contenueCaseSuivane == '.') {
-
-							//Si la pi�ce est sortie du plateau 
-							if (colonneCourante == 0) {
-
-								//Elle arr�te d'avancer
-								deplacementCourant = -1;
-							}
-									
-						//Si la case contient une pi�ce adverse	
-						}else if(contenueCaseSuivane == '^' || contenueCaseSuivane == 'V') {
-									
-							//Elle avance d'une case en plus 
-							valDeplacement ++;
-									
-							//La pi�ce avance d'une case en plus tant qu'elle saute par dessus une pi�ce adverce
-							do{
-							 	//Si la pi�ce est sortie du plateau
-								if (colonneCourante == 0) {
-												
-									deplacementCourant = -1;				
-								}
-							}while((contenueCaseSuivane == '^' || contenueCaseSuivane == 'V') && deplacementCourant>=0);
-										
-							//La pi�ce arr�te son d�placement
-							deplacementCourant = -1;		
-						}
-							
-					}
-							
 				}
 					
 				int tab1[] = {pieceCourrante.getX(), pieceCourrante.getY()};
-				int tab2[] = {pieceCourrante.getX() + valDeplacement, pieceCourrante.getY()};
-
-				possibleMove = convertIntToString(tab1) +"-"+ convertIntToString(tab2);
-				possibleMoves[i] = possibleMove;
-				
-			}
+				int tab2[] = {colonneCourante, pieceCourrante.getY()};
 					
+				//Si le pion n'a pas fait d'allez retour
+				if(tab1[0] != tab2[0]) {
+					
+					possibleMove = convertIntToString(tab1) +"-"+ convertIntToString(tab2);
+					possibleMoves[i] = possibleMove;
+				
+				}else {
+					possibleMoves[i] = "None";
+				}
+	
+			}
+			
+			
 		}else {
-
+			
 			for (int i = 0; i < listJ2.size(); i++) {
 
 				PieceSquadro pieceCourrante =listJ2.get(i);
 				int deplacementCourant = pieceCourrante.getValeurDeplacement();
+				int ligneCourante = pieceCourrante. getY();
+
 				int valDeplacement = 0;
-				
-				//Test si la pi�ce est � l'all�
+
+
+				//Test si la pièce est à l'allé
 				if(pieceCourrante. getY() < 6 && pieceCourrante.getStatut() =='R') {
 
-					//Tant que la pi�ce doit avancer
+					//Tant que la pièce doit avancer
 					while(deplacementCourant > 0) {
 							
 						//Elle avance d'une case
 						deplacementCourant --;
 						valDeplacement ++;
 								
-						int ligneCourante = pieceCourrante. getY() + valDeplacement;
+						ligneCourante = pieceCourrante. getY() + valDeplacement;
 						char contenueCaseSuivane = this.board[ligneCourante][pieceCourrante.getX()];
 								
 						//Si cette case contient un .
 						if (contenueCaseSuivane == '.') {
 									
-							//Si la pi�ce est sortie du plateau 
+							//Si la pièce est sortie du plateau 
 							if (ligneCourante == 6) {
 										
-								//Elle arr�te d'avancer
+								//Elle arrète d'avancer
 								deplacementCourant = -1;
 							}
 									
-							//Si la case contient une pi�ce adverse	
+							//Si la case contient une pièce adverse	
 						}else if(contenueCaseSuivane == '>' || contenueCaseSuivane == '<') {
 									
 							//Elle avance d'une case en plus 
 							valDeplacement ++;
 									
-							//La pi�ce avance d'une case en plus tant qu'elle saute par dessus une pi�ce adverce
+							//La pièce avance d'une case en plus tant qu'elle saute par dessus une pièce adverce
 							do{
-								//Si la pi�ce est sortie du plateau
+								//Si la pièce est sortie du plateau
 								if (ligneCourante == 6) {
 												
-									deplacementCourant = -1;
-								}		
+									deplacementCourant = -1;			
+								}
+											
+								ligneCourante = pieceCourrante. getY() + valDeplacement;
+								contenueCaseSuivane = this.board[ligneCourante][pieceCourrante.getX()];
+								valDeplacement ++;
+											
 							}while((contenueCaseSuivane == '>' || contenueCaseSuivane == '<') && deplacementCourant>=0);
 										
-							//La pi�ce arr�te son d�placement
+							//La pièce arrète son déplacement
 							deplacementCourant = -1;
 
 						}
 								
 					}
-							
+					
+						
 				}else if( pieceCourrante. getY() > 0 && pieceCourrante.getStatut() =='A') {
 
-					System.out.println(" WAGGG " + deplacementCourant);
-
-					//Tant que la pi�ce doit avancer
+					//Tant que la pièce doit avancer
 					while(deplacementCourant > 0) {
 
 						//Elle avance d'une case
 						deplacementCourant --;
 						valDeplacement --;
 								
-						int ligneCourante = pieceCourrante. getY() + valDeplacement;
+						ligneCourante = pieceCourrante. getY() + valDeplacement;
 						char contenueCaseSuivane = this.board[ligneCourante][pieceCourrante.getX()];
 								
 						//Si cette case contient un .
 						if (contenueCaseSuivane == '.') {
-								
-							//Si la pi�ce est sortie du plateau 
+									
+							//Si la pièce est sortie du plateau 
 							if (ligneCourante == 0) {
 										
-								//Elle arr�te d'avancer
+								//Elle arrète d'avancer
 								deplacementCourant = -1;
 							}
 									
-						//Si la case contient une pi�ce adverse	
+						//Si la case contient une pièce adverse	
 						}else if(contenueCaseSuivane == '>' || contenueCaseSuivane == '<') {
-									
+
 							//Elle avance d'une case en plus 
 							valDeplacement --;
 									
-							//La pi�ce avance d'une case en plus tant qu'elle saute par dessus une pi�ce adverce
+							//La pièce avance d'une case en plus tant qu'elle saute par dessus une pièce adverce
 							do{
-								//Si la pi�ce est sortie du plateau
+								//Si la pièce est sortie du plateau
 								if (ligneCourante == 0) {
 												
-									deplacementCourant = -1;				
+									deplacementCourant = -1;						
 								}
 											
-							}while((contenueCaseSuivane == '^' || contenueCaseSuivane == 'V') && deplacementCourant>=0);
+								ligneCourante = pieceCourrante. getY() + valDeplacement;
+								contenueCaseSuivane = this.board[ligneCourante][pieceCourrante.getX()];
+								valDeplacement --;
+											
+							}while((contenueCaseSuivane == '>' || contenueCaseSuivane == '<') && deplacementCourant>=0);
 										
-							//La pi�ce arr�te son d�placement
+							//La pièce arrète son déplacement
 							deplacementCourant = -1;
 
 						}
-							
+									
 					}
-					
+						
 				}
 					
 
 				int tab1[] = {pieceCourrante.getX(), pieceCourrante.getY()};
-				int tab2[] = {pieceCourrante.getX(), pieceCourrante.getY() + valDeplacement};
+				int tab2[] = {pieceCourrante.getX(), ligneCourante};
+				
+				if(tab1[1] != tab2[1]) {
 
-				possibleMove = convertIntToString(tab1) +"-"+ convertIntToString(tab2);
-				possibleMoves[i] = possibleMove;
+					possibleMove = convertIntToString(tab1) +"-"+ convertIntToString(tab2);
+					possibleMoves[i] = possibleMove;
+				
+				}else {
+					possibleMoves[i] = "None";
+				
+				}		
+				
+			}		
 			
-			}
-						
 		}
-			
+		
 		return possibleMoves;
 	}
 	
@@ -769,6 +813,8 @@ public class SquadroBoard implements IPartie2 {
 	
 	@Override
 	public void play(String move, String role) {
+		
+		System.out.println("MOVE : "+move + " , ROLE : " + role);
 		
 		String positionCourante[] = {Character.toString(move.charAt(0)),Character.toString(move.charAt(1))};
 		String newPosition[] = {Character.toString(move.charAt(3)),Character.toString(move.charAt(4))};
@@ -984,10 +1030,19 @@ public class SquadroBoard implements IPartie2 {
         
         String tab[]= b.possibleMoves("horizontal");
         b.play(tab[4],"horizontal");
+        b.printBoard();
+       
         b.play(tab[3],"horizontal");
         tab = b.possibleMoves("horizontal");
-        b.play(tab[3],"horizontal");
+        b.printBoard();
+        
+        b.play(tab[3],"horizontal");  
         tab = b.possibleMoves("horizontal");
+        
+        
+        
+        System.out.println("TAB [3] : "+ tab[3]);
+        
         b.play(tab[3],"horizontal");
         tab = b.possibleMoves("horizontal");
         b.play(tab[3],"horizontal");  
@@ -995,65 +1050,10 @@ public class SquadroBoard implements IPartie2 {
         b.play(tab[3],"horizontal");  
         tab = b.possibleMoves("horizontal");
         b.play(tab[3],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[3],"horizontal");
+       
+       
+        
         b.printBoard();
-
-        b.play(tab[0],"horizontal");
-        b.play(tab[1],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");  
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");  
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");
-        
-        
-        
-        
-        
-    	System.out.println("\nPrint board");
-        b.printBoard(); 
-        
-        String tab2[]= b.possibleMoves("verticale");
-        System.out.println(Arrays.toString(tab2));
-
-        
-        b.play(tab2[0],"verticale");
-    	System.out.println("\nPrint board");
-        b.printBoard();
-
-        tab2= b.possibleMoves("verticale");
-        System.out.println(Arrays.toString(tab2));
-
-        
-        b.play(tab2[0],"verticale");
-    	System.out.println("\nPrint board");
-        b.printBoard();
-        
-        tab2= b.possibleMoves("verticale");
-        System.out.println(Arrays.toString(tab2));
-
-        
-        b.play(tab2[0],"verticale");
-    	System.out.println("\nPrint board");
-        b.printBoard();
-        
-        tab2= b.possibleMoves("verticale");
-        System.out.println(Arrays.toString(tab2));
-
-        
-        b.play(tab2[0],"verticale");
-    	System.out.println("\nPrint board");
-        b.printBoard();
-        
-        
         
         
         
