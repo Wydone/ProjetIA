@@ -8,4 +8,4 @@
 06 >...... 06
 07 .^^^^^. 07
 %  ABCDEFG
-test
+horizontal

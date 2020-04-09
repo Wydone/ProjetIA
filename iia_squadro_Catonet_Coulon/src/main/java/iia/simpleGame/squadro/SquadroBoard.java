@@ -38,7 +38,7 @@ public class SquadroBoard implements IPartie2 {
     public String p1 ;
     public String p2 ; 
     
-    public String currentPlayer = "test"; 
+    public String currentPlayer = "horizontal"; 
     
     
     
