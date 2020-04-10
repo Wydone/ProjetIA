@@ -1,7 +1,9 @@
-package iia.games.contest;
+package iia.simpleGame.contest;
 
-import iia.games.base.IChallenger;
+import iia.simpleGame.base.IChallenger;
 import org.apache.commons.cli.*;
+
+
 
 import java.io.BufferedReader;
 import java.io.IOException;

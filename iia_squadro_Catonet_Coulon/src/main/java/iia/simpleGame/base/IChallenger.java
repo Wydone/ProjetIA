@@ -1,4 +1,4 @@
-package iia.games.base;
+package iia.simpleGame.base;
 
 public interface IChallenger {
 

@@ -1,4 +1,4 @@
-package iia.games.contest;
+package iia.simpleGame.contest;
 
 import java.util.StringTokenizer;
 

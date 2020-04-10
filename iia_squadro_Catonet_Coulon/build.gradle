@@ -30,6 +30,12 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    
+    // This dependency is exported to consumers, that is to say found on their compile classpath.
+    api 'commons-cli:commons-cli:1.4'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
 }
 
 

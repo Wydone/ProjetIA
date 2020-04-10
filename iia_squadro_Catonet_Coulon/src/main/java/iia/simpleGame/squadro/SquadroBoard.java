@@ -34,11 +34,8 @@ public class SquadroBoard implements IPartie2 {
     public final static char HAUT = '^'; 
     public final static char BAS = 'v'; 
     
-    
-    public String p1 ;
-    public String p2 ; 
-    
-    public String currentPlayer = "horizontal"; 
+  
+    public String currentPlayer = "horizontal"; //A changer ! 
     
     
     
