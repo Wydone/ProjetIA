@@ -35,7 +35,7 @@ public class SquadroBoard implements IPartie2 {
     public final static char BAS = 'v'; 
     
   
-    public String nextPlayer; 
+    public String nextPlayer = ""; 
     
     
     
