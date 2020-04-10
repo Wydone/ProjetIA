@@ -35,7 +35,7 @@ public class SquadroBoard implements IPartie2 {
     public final static char BAS = 'v'; 
     
   
-    public String currentPlayer = "horizontal"; //A changer ! 
+    public String nextPlayer; 
     
     
     
@@ -186,8 +186,8 @@ public class SquadroBoard implements IPartie2 {
 			out.write("%  ABCDEFG");
 			out.println();
 			
-			//Undiquer le joueur dont c'est le tour : 
-			out.write(currentPlayer);
+			//Undiquer le joueur dont se sera le tour : 
+			out.write(nextPlayer);
 			
 			out.close();
 			
@@ -1023,7 +1023,10 @@ public class SquadroBoard implements IPartie2 {
         }
     }
 	
-	
+	//Attention nextP doit être ecrit en minuscule (soit "horizontal" soit "vertical") 
+	public void setNextPlayer(String nextP) {
+		this.nextPlayer = nextP;
+	}
 	
 	
 	//---------------------------------------
