@@ -27,6 +27,8 @@ public class SquadroGameH extends ASquadroGame {
     @Override
     public int getValue(String role) {
         // TODO heuristic for Horizontal player
+    	
+    	
         return 0;
     }
 }

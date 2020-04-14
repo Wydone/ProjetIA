@@ -265,7 +265,7 @@ public class SquadroBoard implements IPartie2 {
 			
 			boolean nonTrouve = true;
 			
-			if(player == "horizontal") {
+			if(player == "HORIZONTAL") {
 				listPieceCourante = this.listJ1;
 			
 			}else {
@@ -285,7 +285,7 @@ public class SquadroBoard implements IPartie2 {
 					int colonneCourante = pieceCourante. getX() + valDeplacement;
 					int ligneCourante = pieceCourante. getY() + valDeplacement;
 	
-					if(player == "horizontal") {
+					if(player == "HORIZONTAL") {
 							
 							//Verifie si la piece bouge sur la meme ligne
 						if(tabInt_posCourante[1] == tabInt_newPos[1]) {
@@ -399,7 +399,7 @@ public class SquadroBoard implements IPartie2 {
 								
 							}
 							
-						}else if(player == "verticale") {
+						}else if(player == "VERTICAL") {
 	
 							//Verifie si la piece bouge sur la meme colonne
 							if(tabInt_posCourante[0] == tabInt_newPos[0]) {
@@ -540,7 +540,7 @@ public class SquadroBoard implements IPartie2 {
 		String possibleMoves[] = {"", "", "", "", ""};
 		String possibleMove ="";
 		
-		if(player == "horizontal") {
+		if(player == "HORIZONTAL") {
 			
 			for (int i = 0; i < listJ1.size(); i++) {
 				
@@ -672,7 +672,7 @@ public class SquadroBoard implements IPartie2 {
 			}
 			
 			
-		}else {
+		}else { //Si le player est vertical
 			
 			for (int i = 0; i < listJ2.size(); i++) {
 
@@ -823,7 +823,7 @@ public class SquadroBoard implements IPartie2 {
 		char symbole = ' ';
 		boolean nonTrouve = true;
 		
-		if(role == "horizontal") {
+		if(role == "HORIZONTAL") {
 			listPieceCourante = this.listJ1;
 		
 		}else {
@@ -846,7 +846,7 @@ public class SquadroBoard implements IPartie2 {
 				int bornSup = 0;
 		
 				//Determine si le symbole (sur le plateau) et le status de la piece change avec la nouvelle position
-				if(role == "horizontal") {
+				if(role == "HORIZONTAL") {
 					
 					if(pieceCourante.getStatut()=='A') {
 								
@@ -985,8 +985,8 @@ public class SquadroBoard implements IPartie2 {
 	@Override
 	public boolean gameOver() {
 		
-		String tab[] = this.possibleMoves("horizontal");
-		String tab2[] = this.possibleMoves("verticale");
+		String tab[] = this.possibleMoves("HORIZONTAL");
+		String tab2[] = this.possibleMoves("VERTICAL");
 	    
 		int cptHorizontal = 0;
 	    int cptVerticale = 0;
@@ -1029,6 +1029,7 @@ public class SquadroBoard implements IPartie2 {
 	}
 	
 	
+	
 	//---------------------------------------
 	// MAIN
 	//---------------------------------------
@@ -1050,73 +1051,23 @@ public class SquadroBoard implements IPartie2 {
         
         System.out.println("===== TEST FONCTION PLAY =====");
         
-        String tab[]= b.possibleMoves("horizontal");
-        b.play(tab[4],"horizontal");
-        b.play(tab[3],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[3],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[3],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[3],"horizontal");  
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[3],"horizontal");  
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[3],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[3],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[3],"horizontal");
-        b.printBoard();
-
-        b.play(tab[0],"horizontal");
-        b.play(tab[1],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");  
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");  
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[1],"horizontal");
-        
-        
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[0],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[0],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[0],"horizontal");  
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[0],"horizontal");  
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[0],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[0],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[0],"horizontal");
-        System.out.println("\nPrint board");
-
-        
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[2],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[2],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[2],"horizontal");  
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[2],"horizontal");  
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[2],"horizontal");
-        tab = b.possibleMoves("horizontal");
-        b.play(tab[2],"horizontal");
-
+        String tab[]= b.possibleMoves("HORIZONTAL");
+        b.play(tab[4],"HORIZONTAL");
+        b.play(tab[3],"HORIZONTAL");
+        tab = b.possibleMoves("HORIZONTAL");
+        b.play(tab[3],"HORIZONTAL");
+        tab = b.possibleMoves("HORIZONTAL");
+        b.play(tab[3],"HORIZONTAL");
+        tab = b.possibleMoves("HORIZONTAL");
+        b.play(tab[3],"HORIZONTAL");  
+        tab = b.possibleMoves("HORIZONTAL");
+        b.play(tab[3],"HORIZONTAL");  
+        tab = b.possibleMoves("HORIZONTAL");
+        b.play(tab[3],"HORIZONTAL");
+        tab = b.possibleMoves("HORIZONTAL");
+        b.play(tab[3],"HORIZONTAL");
+        tab = b.possibleMoves("HORIZONTAL");
+        b.play(tab[3],"HORIZONTAL");
         b.printBoard();
         
         if (b.gameOver()) {
