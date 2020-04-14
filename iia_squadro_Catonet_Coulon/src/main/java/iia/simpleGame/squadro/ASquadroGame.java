@@ -57,13 +57,7 @@ public abstract class ASquadroGame extends AGame {
         return my_board.gameOver();
     }
 
-    //ON N'UTILISE PAS CETTE METHODE !!
-	@Override
-	public int getValue(String role) {
-		
-		return 0;
-	}
-	
+   
 	public SquadroBoard getBoard() {
 		return this.my_board;
 	}
