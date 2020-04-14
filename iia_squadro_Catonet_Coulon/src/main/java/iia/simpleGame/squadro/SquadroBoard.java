@@ -1029,6 +1029,90 @@ public class SquadroBoard implements IPartie2 {
 	}
 	
 	
+	public int nbPieceAller(String role) {
+		
+		int result = 0; 
+		
+		if(role == "HORIZONTAL") {
+			
+			for(PieceSquadro p : listJ1) {
+				if(p.getStatut() == 'A') {
+					result+=1; 
+				}
+			}
+			
+		}else if(role == "VERTICAL") {
+			
+			for(PieceSquadro p : listJ2) {
+				if(p.getStatut() == 'A') {
+					result+=1; 
+				}
+			}
+			
+		}else {
+			System.out.println("ERREUR : role introuvable");
+		}
+		
+		return result; 
+	}
+	
+	public int nbPieceRetour(String role) {
+		
+		int result = 0; 
+		
+		if(role == "HORIZONTAL") {
+			
+			for(PieceSquadro p : listJ1) {
+				if(p.getStatut() == 'R') {
+					result+=1; 
+				}
+			}
+			
+		}else if(role == "VERTICAL") {
+			
+			for(PieceSquadro p : listJ2) {
+				if(p.getStatut() == 'R') {
+					result+=1; 
+				}
+			}
+			
+		}else {
+			System.out.println("ERREUR : role introuvable");
+		}
+		
+		return result; 
+	}
+	
+	public int nbPieceDehors(String role) {
+		
+		int result = 0;
+		
+		if(role == "HORIZONTAL") {
+			
+			for(PieceSquadro p : listJ1) {
+				if(p.getStatut() == 'D') {
+					result+=1; 
+				}
+			}
+			
+		}else if(role == "VERTICAL") {
+			
+			for(PieceSquadro p : listJ2) {
+				if(p.getStatut() == 'D') {
+					result+=1; 
+				}
+			}
+			
+		}else {
+			System.out.println("ERREUR : role introuvable");
+		}
+
+		return result; 
+		
+	}
+	
+
+	
 	
 	//---------------------------------------
 	// MAIN
