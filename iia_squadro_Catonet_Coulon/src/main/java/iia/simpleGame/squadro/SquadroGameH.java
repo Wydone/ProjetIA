@@ -22,6 +22,9 @@ public class SquadroGameH extends ASquadroGame {
     	
     	this.enemy = new Player("Enemy", enemyRole, new Minimax(enemyRole, myRole)); 
     	
+    	my_board.printBoard();
+    	
+    	
     }
 
     @Override
@@ -33,5 +36,16 @@ public class SquadroGameH extends ASquadroGame {
     	
     	
         return 0;
+    }
+    
+    public String getEnemyRole() {
+    	return enemyRole;
+    }
+    
+    public Player getMyPlayer() {
+    	return me ; 
+    }
+    public Player getEnemyPlayer() {
+    	return enemy;
     }
 }

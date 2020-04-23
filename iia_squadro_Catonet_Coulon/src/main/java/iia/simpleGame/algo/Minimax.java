@@ -34,6 +34,7 @@ public class Minimax implements IAlgo {
         // On calcul tous les coups possibles
         ArrayList<String> allMoves = game.possibleMoves(roleMax);
         for (String move : allMoves) {
+        	System.out.println("miniMAX");
             int heuristicMove;
             IGame new_b = game.play(move, roleMax);
             heuristicMove = minmax(new_b, depthMax - 1);

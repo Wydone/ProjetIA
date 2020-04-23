@@ -20,6 +20,10 @@ public class SquadroGameV extends ASquadroGame {
     	
     	this.enemy = new Player("Enemy", enemyRole, new Minimax(enemyRole, myRole)); 
     	
+    	
+    	my_board.printBoard();
+    	
+   
     }
 
  
@@ -32,5 +36,15 @@ public class SquadroGameV extends ASquadroGame {
     	int h = (this.getBoard().nbPieceAller(myRole) + (this.getBoard().nbPieceRetour(myRole)*10) + (this.getBoard().nbPieceDehors(myRole)*30)) - ((this.getBoard().nbPieceAller(enemyRole) + (this.getBoard().nbPieceRetour(enemyRole)*10) + (this.getBoard().nbPieceDehors(enemyRole)*30))); 
     	
         return h;
+    }
+    
+    public String getEnemyRole() {
+    	return enemyRole;
+    }
+    public Player getMyPlayer() {
+    	return me ; 
+    }
+    public Player getEnemyPlayer() {
+    	return enemy;
     }
 }

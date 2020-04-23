@@ -22,12 +22,13 @@ public abstract class ASquadroGame extends AGame {
 
     @Override
     public IGame play(String move, String role) {
-    		
+    	
+    	System.out.println("ASQUADRO GAME");
+    	
     	//Joueur le coup sur le plateau 
     	my_board.play(move, role);
-    		
-    	//Retourne l'etat de la game	
-        return this;
+		
+    	return ((IGame) this) ;
     }
 
     //return la liste des coups possible pour un joueur

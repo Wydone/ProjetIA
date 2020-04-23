@@ -33,4 +33,8 @@ public class Player {
                 ", " + role +
                 '}';
     }
+    
+    public IAlgo getAlgo() {
+    	return this.algo; 
+    }
 }
