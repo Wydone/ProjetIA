@@ -1,5 +1,6 @@
 package iia.simpleGame.squadro;
 
+import iia.simpleGame.algo.AlphaBeta;
 import iia.simpleGame.algo.Minimax;
 import iia.simpleGame.base.Player;
 
@@ -16,10 +17,15 @@ public class SquadroGameV extends ASquadroGame {
     	super(); 
     	  
     	//Initialisation des joueurs avec les algos avec lesquels on veut pouvoir jouer 
-    	this.me = new Player("Me", myRole, new Minimax(myRole, enemyRole));
+    //	this.me = new Player("Me", myRole, new Minimax(myRole, enemyRole));
     	
-    	this.enemy = new Player("Enemy", enemyRole, new Minimax(enemyRole, myRole)); 
+    	//this.enemy = new Player("Enemy", enemyRole, new Minimax(enemyRole, myRole)); 
     	
+    	
+    	//Algo alphabeta
+    	this.me = new Player("Me", myRole, new AlphaBeta(this,myRole, enemyRole));
+    	
+    	this.enemy = new Player("Enemy", enemyRole, new  AlphaBeta(this,enemyRole, myRole)); 
     	
     	my_board.printBoard();
     	

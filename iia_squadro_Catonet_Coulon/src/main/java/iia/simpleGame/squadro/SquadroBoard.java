@@ -68,7 +68,42 @@ public class SquadroBoard implements IPartie2 {
 	
     }
     
-    
+	public SquadroBoard copy() {
+		
+		return new SquadroBoard(this.board, this.copy(this.listJ1), this.copy(this.listJ2));
+	}
+	
+
+	public ArrayList<PieceSquadro> copy(ArrayList<PieceSquadro> listeDepart) {
+		ArrayList<PieceSquadro> newList = new ArrayList<PieceSquadro>();
+
+		for(int i = 0; i < listeDepart.size(); i++) {
+			PieceSquadro currentPiece = listeDepart.get(i);
+			newList.add(currentPiece.copy(currentPiece.getX(), currentPiece.getY(), currentPiece.getValeurDeplacement(), currentPiece.getStatut()));
+		}
+		return newList;
+	}
+	
+	public SquadroBoard(char depuis[][], ArrayList<PieceSquadro> listJ1, ArrayList<PieceSquadro> listJ2) {
+		
+		board = new char[TAILLE][TAILLE]; 
+
+		
+		ArrayList<PieceSquadro> l1 = listJ1;
+		ArrayList<PieceSquadro> l2 = listJ2;
+
+		this.listJ1 = l1;
+		this.listJ2 = l2;
+		
+		for(int i=0 ; i < TAILLE ; i++) {
+			for (int j=0; j < TAILLE ; j++) {
+				board[i][j] = depuis[i][j]; 
+			}
+		}
+	}
+	    
+	
+	
     public int valDenInitJ1(int i) {
 		int valDepl = 0; 
 
@@ -537,9 +572,10 @@ public class SquadroBoard implements IPartie2 {
 	
 	//Retourne la liste des mouvement possible pour un joueur
 	@Override
-	public String[] possibleMoves(String player) {
-		
-		String possibleMoves[] = {"", "", "", "", ""};
+	public ArrayList<String> possibleMoves(String player) {
+		System.out.println("dans possibleMoves. Player : " + player);
+
+		ArrayList<String> possibleMoves = new ArrayList<String>();
 		String possibleMove ="";
 		
 		if(player == "HORIZONTAL") {
@@ -553,10 +589,10 @@ public class SquadroBoard implements IPartie2 {
 
 				int valDeplacement = 0;
  
-				//Test si la pièce est à l'allée
+				//Test si la pi�ce est � l'all�e
 				if(pieceCourrante.getX() < 6 && pieceCourrante.getStatut() =='A') {
 
-					//Tant que la pièce doit avancer
+					//Tant que la pi�ce doit avancer
 					while(deplacementCourant > 0) {
 
 						//Elle avance d'une case
@@ -564,27 +600,27 @@ public class SquadroBoard implements IPartie2 {
 						valDeplacement ++;
 								
 						colonneCourante = pieceCourrante. getX() + valDeplacement;
-						char contenueCourante = board[ pieceCourrante.getY()][colonneCourante];
+						char contenueCourante = this.board[ pieceCourrante.getY()][colonneCourante];
 
 						//Si cette case contient un .
 						if (contenueCourante == '.') {
 
-							//Si la pièce est sortie du plateau 
+							//Si la pi�ce est sortie du plateau 
 							if (colonneCourante == 6) {
 
-								//Elle arrète d'avancer
+								//Elle arr�te d'avancer
 								deplacementCourant = -1;
 							}
 									
-							//Si la case contient une pièce adverse	
+							//Si la case contient une pi�ce adverse	
 						}else if(contenueCourante == '^' || contenueCourante == 'V') {
 									
 							valDeplacement ++;
 
-							//La pièce avance d'une case en plus tant qu'elle saute par dessus une pièce adverce
+							//La pi�ce avance d'une case en plus tant qu'elle saute par dessus une pi�ce adverce
 							do{
 
-								//Si la pièce est sortie du plateau
+								//Si la pi�ce est sortie du plateau
 								if (colonneCourante == 6) {
 												
 									deplacementCourant = -1;
@@ -598,7 +634,7 @@ public class SquadroBoard implements IPartie2 {
 											
 							}while((contenueCourante == '^' || contenueCourante == 'v') && deplacementCourant>=0);
 
-							//La pièce arrète son déplacement
+							//La pi�ce arr�te son d�placement
 							deplacementCourant = -1;
 						}
 								
@@ -606,7 +642,7 @@ public class SquadroBoard implements IPartie2 {
 							
 				}else if( pieceCourrante. getX() > 0 && pieceCourrante.getStatut() =='R') {
 						
-					//Tant que la pièce doit avancer
+					//Tant que la pi�ce doit avancer
 					while(deplacementCourant > 0) {
 
 						//Elle avance d'une case
@@ -615,41 +651,46 @@ public class SquadroBoard implements IPartie2 {
 
 						colonneCourante = pieceCourrante. getX() + valDeplacement;
 						char contenueCaseSuivane = this.board[pieceCourrante.getY()][colonneCourante];
-								
-
+						//System.out.println("colonneCourante : " + colonneCourante);
+						//this.printBoard();
 						if (contenueCaseSuivane == '.') {
 
-							//Si la pièce est sortie du plateau 
+							//Si la pi�ce est sortie du plateau 
 							if (colonneCourante == 0) {
 
-								//Elle arrète d'avancer
+								//Elle arr�te d'avancer
 								deplacementCourant = -1;
 							}
 									
-						//Si la case contient une pièce adverse	
+						//Si la case contient une pi�ce adverse	
 						}else if(contenueCaseSuivane == '^' || contenueCaseSuivane == 'v') {
 									
 							//Elle avance d'une case en plus 
 							valDeplacement --;
-									
-							//La pièce avance d'une case en plus tant qu'elle saute par dessus une pièce adverce
+					//		System.out.println("colonneCourante1 : " + colonneCourante);
+
+							//La pi�ce avance d'une case en plus tant qu'elle saute par dessus une pi�ce adverce
 							do{
 								
 								valDeplacement --;
-
-								//Si la pièce est sortie du plateau
-								if (colonneCourante == 0) {
-												
+								
+								colonneCourante = pieceCourrante. getX() + valDeplacement;
+								//Si la pi�ce est sortie du plateau
+								if (colonneCourante <= 0) {
+									colonneCourante = 0;	
 									deplacementCourant = -1;			
 								}
 											
-								colonneCourante = pieceCourrante. getX() + valDeplacement;
+							//	System.out.println("pieceCourrante.getY() : " + pieceCourrante.getY());
+							//	System.out.println("colonneCourante : " + colonneCourante);
+
+								
 								contenueCaseSuivane = this.board[pieceCourrante.getY()][colonneCourante];
 								valDeplacement --;
 											
 							}while((contenueCaseSuivane == '^' || contenueCaseSuivane == 'V') && deplacementCourant>=0);
 										
-							//La pièce arrète son déplacement
+							//La pi�ce arr�te son d�placement
 							deplacementCourant = -1;
 
 						}
@@ -664,20 +705,15 @@ public class SquadroBoard implements IPartie2 {
 				//Si le pion n'a pas fait d'allez retour
 				if(tab1[0] != tab2[0]) {
 					
-					//System.out.println("Tab1 : " + tab1[0] + tab1[1]);
-					//System.out.println("Tab2 : " + tab2[0] + tab2[1]);
-					
 					possibleMove = convertIntToString(tab1) +"-"+ convertIntToString(tab2);
-					possibleMoves[i] = possibleMove;
+					possibleMoves.add(possibleMove);
 				
-				}else {
-					possibleMoves[i] = "None";
 				}
 	
 			}
 			
 			
-		}else { //Si le player est vertical
+		}else {
 			
 			for (int i = 0; i < listJ2.size(); i++) {
 
@@ -688,10 +724,10 @@ public class SquadroBoard implements IPartie2 {
 				int valDeplacement = 0;
 
 
-				//Test si la pièce est à l'allé
+				//Test si la pi�ce est � l'all�
 				if(pieceCourrante. getY() < 6 && pieceCourrante.getStatut() =='R') {
 
-					//Tant que la pièce doit avancer
+					//Tant que la pi�ce doit avancer
 					while(deplacementCourant > 0) {
 							
 						//Elle avance d'une case
@@ -704,22 +740,22 @@ public class SquadroBoard implements IPartie2 {
 						//Si cette case contient un .
 						if (contenueCaseSuivane == '.') {
 									
-							//Si la pièce est sortie du plateau 
+							//Si la pi�ce est sortie du plateau 
 							if (ligneCourante == 6) {
 										
-								//Elle arrète d'avancer
+								//Elle arr�te d'avancer
 								deplacementCourant = -1;
 							}
 									
-							//Si la case contient une pièce adverse	
+							//Si la case contient une pi�ce adverse	
 						}else if(contenueCaseSuivane == '>' || contenueCaseSuivane == '<') {
 									
 							//Elle avance d'une case en plus 
 							valDeplacement ++;
 									
-							//La pièce avance d'une case en plus tant qu'elle saute par dessus une pièce adverce
+							//La pi�ce avance d'une case en plus tant qu'elle saute par dessus une pi�ce adverce
 							do{
-								//Si la pièce est sortie du plateau
+								//Si la pi�ce est sortie du plateau
 								if (ligneCourante == 6) {
 												
 									deplacementCourant = -1;			
@@ -731,7 +767,7 @@ public class SquadroBoard implements IPartie2 {
 											
 							}while((contenueCaseSuivane == '>' || contenueCaseSuivane == '<') && deplacementCourant>=0);
 										
-							//La pièce arrète son déplacement
+							//La pi�ce arr�te son d�placement
 							deplacementCourant = -1;
 
 						}
@@ -741,7 +777,7 @@ public class SquadroBoard implements IPartie2 {
 						
 				}else if( pieceCourrante. getY() > 0 && pieceCourrante.getStatut() =='A') {
 
-					//Tant que la pièce doit avancer
+					//Tant que la pi�ce doit avancer
 					while(deplacementCourant > 0) {
 
 						//Elle avance d'une case
@@ -754,34 +790,34 @@ public class SquadroBoard implements IPartie2 {
 						//Si cette case contient un .
 						if (contenueCaseSuivane == '.') {
 									
-							//Si la pièce est sortie du plateau 
+							//Si la pi�ce est sortie du plateau 
 							if (ligneCourante == 0) {
 										
-								//Elle arrète d'avancer
+								//Elle arr�te d'avancer
 								deplacementCourant = -1;
 							}
 									
-						//Si la case contient une pièce adverse	
+						//Si la case contient une pi�ce adverse	
 						}else if(contenueCaseSuivane == '>' || contenueCaseSuivane == '<') {
 
 							//Elle avance d'une case en plus 
 							valDeplacement --;
 									
-							//La pièce avance d'une case en plus tant qu'elle saute par dessus une pièce adverce
+							//La pi�ce avance d'une case en plus tant qu'elle saute par dessus une pi�ce adverce
 							do{
-								//Si la pièce est sortie du plateau
-								if (ligneCourante == 0) {
-												
+								//Si la pi�ce est sortie du plateau
+								ligneCourante = pieceCourrante. getY() + valDeplacement;
+								if (ligneCourante <= 0) {
+									ligneCourante =0;		
 									deplacementCourant = -1;						
 								}
 											
-								ligneCourante = pieceCourrante. getY() + valDeplacement;
 								contenueCaseSuivane = this.board[ligneCourante][pieceCourrante.getX()];
 								valDeplacement --;
 											
 							}while((contenueCaseSuivane == '>' || contenueCaseSuivane == '<') && deplacementCourant>=0);
 										
-							//La pièce arrète son déplacement
+							//La pi�ce arr�te son d�placement
 							deplacementCourant = -1;
 
 						}
@@ -797,12 +833,9 @@ public class SquadroBoard implements IPartie2 {
 				if(tab1[1] != tab2[1]) {
 
 					possibleMove = convertIntToString(tab1) +"-"+ convertIntToString(tab2);
-					possibleMoves[i] = possibleMove;
+					possibleMoves.add(possibleMove);
 				
-				}else {
-					possibleMoves[i] = "None";
-				
-				}		
+				}
 				
 			}		
 			
@@ -816,10 +849,6 @@ public class SquadroBoard implements IPartie2 {
 	@Override
 	public void play(String move, String role) {
 		
-		System.out.println("SQUADRO BOARD : PLAY FONCTION ");
-		
-		System.out.println("MOVE : "+move + " , ROLE : " + role);
-		
 		String positionCourante[] = {Character.toString(move.charAt(0)),Character.toString(move.charAt(1))};
 		String newPosition[] = {Character.toString(move.charAt(3)),Character.toString(move.charAt(4))};
 		ArrayList<PieceSquadro> listPieceCourante = new ArrayList<PieceSquadro>() ;
@@ -832,19 +861,17 @@ public class SquadroBoard implements IPartie2 {
 		
 		if(role == "HORIZONTAL") {
 			listPieceCourante = listJ1;
+			System.out.println("HORIZONTALLLLLLLLLLLLLLLLLLLLLLLLLLLL : " + listJ1);
+
 		
-		}else {
+		}else { 
 			listPieceCourante = listJ2;
+			System.out.println("VERTICALLLLLLLLLLLLLLLLLLLLLLLLLLLLLL : " + listJ2);
+
 		}
 
 		while(nonTrouve) {
-		
-			//System.out.println("tabInt_posCourante[0] : " + tabInt_posCourante[0]);
-	    	//System.out.println("tabInt_posCourante[1] : " + tabInt_posCourante[1]);
-	    	//System.out.println("listPieceCourante.get(i).getY()] : " + listPieceCourante.get(i).getY());
-	    	//System.out.println("listPieceCourante.get(i).getX()] : " + listPieceCourante.get(i).getX());
-			//Met a jpur la position des pièce dans la liste
-			//System.out.println("Valeur de i : " + i); 
+		 
 			
 			if((listPieceCourante.get(i).getX() == tabInt_posCourante[0]) && (listPieceCourante.get(i).getY() == tabInt_posCourante[1])) {
 
@@ -991,33 +1018,25 @@ public class SquadroBoard implements IPartie2 {
 		//Met a jour le plateau
 		board[tabInt_posCourante[1]][tabInt_posCourante[0]]= '.';
 		board[tabInt_newPos[1]][tabInt_newPos[0]]= symbole;		
+	//	this.printBoard();
+
 	}
 
 	@Override
 	public boolean gameOver() {
 		
-		String tab[] = this.possibleMoves("HORIZONTAL");
-		String tab2[] = this.possibleMoves("VERTICAL");
+		ArrayList<String> tab = this.possibleMoves("HORIZONTAL");
+		ArrayList<String> tab2 = this.possibleMoves("VERTICALE");
 	    
-		int cptHorizontal = 0;
-	    int cptVerticale = 0;
-
-	    for(int i = 0; i< this.listJ1.size(); i++) {
-	            
-	    	if(tab[i] == "None") {
-                cptHorizontal++;
-            }
-	                
-            if(tab2[i] == "None") {
-                cptVerticale ++;
-            }
-	            
-        }
 	        
-	    if(cptHorizontal >=4 || cptVerticale >=4) {
+	    if(tab.size() >1 && tab2.size() >1) {
+			System.out.println("PAS GAME OVER");
+
 	    	return true;
 
 	    }else {
+			System.out.println("GAME OVER");
+
 	        return false;
 
 	    }
@@ -1123,82 +1142,194 @@ public class SquadroBoard implements IPartie2 {
 	}
 	
 
+	
+	//Permet de jouer un coup � l'envers
+	public void reverseCoup(String move, String role) {
+		
+		String newPosition[] = {Character.toString(move.charAt(0)),Character.toString(move.charAt(1))};
+		String positionCourante[] = {Character.toString(move.charAt(3)),Character.toString(move.charAt(4))};
+		ArrayList<PieceSquadro> listPieceCourante = new ArrayList<PieceSquadro>() ;
+		
+		int tabInt_posCourante[] = convertStringToInt(positionCourante);
+		int tabInt_newPos[] = convertStringToInt(newPosition);
+		int i = 0;
+		char symbole = ' ';
+		boolean nonTrouve = true;
+		
+		if(role == "HORIZONTAL") {
+			listPieceCourante = listJ1;
+		
+		}else {
+			listPieceCourante = listJ2;
+		}
 
+		while(nonTrouve) {
+		
+			
+			if((listPieceCourante.get(i).getX() == tabInt_posCourante[0]) && (listPieceCourante.get(i).getY() == tabInt_posCourante[1])) {
+
+				PieceSquadro pieceCourante = listPieceCourante.get(i);
+				pieceCourante.setX(tabInt_newPos[0]);
+				pieceCourante.setY(tabInt_newPos[1]);
+				int bornInf = 0;
+				int bornSup = 0;
+		
+				//Determine si le symbole (sur le plateau) et le status de la piece change avec la nouvelle position
+				if(role == "HORIZONTAL") {
+					
+					if(pieceCourante.getStatut()=='A') {
+						
+						symbole = '>';
+
+					}else if(pieceCourante.getStatut()=='R') {
+					
+						if(tabInt_posCourante[0]== 6) {
+							pieceCourante.setStatut('A');
+							symbole = '>';		
+						}else {
+							symbole = '<';		
+							pieceCourante.setStatut('R');
+						}
+ 
+					}else if(pieceCourante.getStatut()=='D') {
+						pieceCourante.setStatut('R');
+						symbole = '<';		
+
+					}else {
+						symbole = '.';
+
+					}
+	
+					//Borne utilisées pour savoir si une pièce a été mangé quand le coup a été joué
+					if(tabInt_newPos[0] > tabInt_posCourante[0]) {
+						bornInf = tabInt_posCourante[0];
+						bornSup = tabInt_newPos[0];
+					
+					}else {
+						bornSup = tabInt_posCourante[0];
+						bornInf = tabInt_newPos[0];
+					}
+							
+					for(i = 0; i< this.listJ2.size(); i++) {
+							
+						if(this.listJ2.get(i).getY() == pieceCourante.getY()) {
+								
+							if(this.listJ2.get(i).getX() < bornSup  && this.listJ2.get(i).getX() > bornInf) {
+								
+								this.board[this.listJ2.get(i).getY()][this.listJ2.get(i).getX()]= '.';
+									
+								if(this.listJ2.get(i).getStatut() == 'A'){
+								
+									this.board[TAILLE-1][this.listJ2.get(i).getX()]= '^';
+									this.listJ2.get(i).setY(TAILLE-1);
+								
+								}else{
+									board[0][this.listJ2.get(i).getX()]= 'v';
+									listJ2.get(i).setY(0);
+								}
+									
+							}
+								
+						}
+							
+					}
+								
+				}else {
+					
+					if(pieceCourante.getStatut()=='A') {
+						
+						symbole ='^';
+
+					}else if(pieceCourante.getStatut()=='R') {
+						
+						if(tabInt_posCourante[0]== 6) {
+							pieceCourante.setStatut('A');
+							symbole = '^';		
+						}else {
+							symbole = 'v';		
+							pieceCourante.setStatut('R');
+						}
+						
+					}else if(pieceCourante.getStatut()=='D') {
+						pieceCourante.setStatut('R'); 
+						symbole = 'v';
+						
+					}else {
+						symbole = '.';
+					}
+					
+					
+					//Borne utilisées pour savoir si une pièce a été mangé quand le coup a été joué
+					if(tabInt_newPos[1] > tabInt_posCourante[1]) {
+						bornInf = tabInt_posCourante[1];
+						bornSup = tabInt_newPos[1];
+					
+					}else {
+						bornSup = tabInt_posCourante[1];
+						bornInf = tabInt_newPos[1];
+					}
+					
+					
+					
+					for(i = 0; i< this.listJ1.size(); i++) {
+						
+						if(this.listJ1.get(i).getX() == pieceCourante.getX()) {
+							
+							if(this.listJ1.get(i).getY() < bornSup  && this.listJ1.get(i).getY() > bornInf) {
+							
+								this.board[this.listJ1.get(i).getY()][this.listJ1.get(i).getX()]= '.';
+								
+								if(this.listJ1.get(i).getStatut() == 'A'){
+								
+									this.board[this.listJ1.get(i).getY()][0]= '>';
+									this.listJ1.get(i).setX(0);
+								
+								}else{
+									this.board[this.listJ1.get(i).getY()][TAILLE -1]= '<';
+									this.listJ1.get(i).setX(TAILLE-1);
+								}
+								
+							}
+							
+						}
+						
+					}
+				}										
+				
+				nonTrouve = false;
+			
+			}
+			
+			i++;
+
+		}
+		
+		System.out.println("MOVE PLAYED : "+move);
+
+		//Met a jour le plateau
+		board[tabInt_posCourante[1]][tabInt_posCourante[0]]= '.';
+		board[tabInt_newPos[1]][tabInt_newPos[0]]= symbole;		
+	//	this.printBoard();
+
+		
+	}
+	
+	
+	
+	
+	
 	
 	//---------------------------------------
 	// MAIN
 	//---------------------------------------
 	
 	public static void main(String[] args) {
-        System.out.println("====== JEU DU SQUADRO ======");
-        
-        SquadroBoard b = new SquadroBoard(); 
-     
-        b.printBoard();
-       
-        System.out.println("STOCKAGE dans un fichier ");
-        
-        b.saveToFile("initialBoard"); 
-        b.setFromFile("initialBoard");
-        
-        b.printBoard();
-        
-        
-        System.out.println("===== TEST FONCTION PLAY =====");
-        
-        String tab[]= b.possibleMoves("HORIZONTAL");
-        String tab2[]= b.possibleMoves("VERTICAL");
-        
-        System.out.println("Mes moves : ");
-        
-        for (String m : tab) {
-        	System.out.println(m);
-        }
-        System.out.println("Moves verticals : ");
-        
-        for (String m : tab2) {
-        	System.out.println(m);
-        }
-        
-        b.play("A2-B2","HORIZONTAL");
-        b.printBoard();
-        
-        b.play("A6-B6", "HORIZONTAL");
-        
-        
-        tab = b.possibleMoves("HORIZONTAL");
-        
-        System.out.println("Mes moves : "+ tab.toString());
-        for (String m : tab) {
-        	System.out.println(m);
-        }
-        
-        /*
-        b.play(tab[3],"HORIZONTAL");
-        tab = b.possibleMoves("HORIZONTAL");
 
-        
-        
-        tab = b.possibleMoves("HORIZONTAL");
-        b.play(tab[3],"HORIZONTAL");
-        tab = b.possibleMoves("HORIZONTAL");
-        b.play(tab[3],"HORIZONTAL");  
-        tab = b.possibleMoves("HORIZONTAL");
-        b.play(tab[3],"HORIZONTAL");  
-        tab = b.possibleMoves("HORIZONTAL");
-        b.play(tab[3],"HORIZONTAL");
-        tab = b.possibleMoves("HORIZONTAL");
-        b.play(tab[3],"HORIZONTAL");
-        tab = b.possibleMoves("HORIZONTAL");
-        b.play(tab[3],"HORIZONTAL");
-        b.printBoard();*/
-        
-        if (b.gameOver()) {
-        	System.out.println(" ======= GAME OVER =======");
-        }
-   
+	}
 
-    }
 
+	
+	
+	
 }
 

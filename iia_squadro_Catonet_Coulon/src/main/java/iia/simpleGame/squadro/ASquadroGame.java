@@ -35,15 +35,7 @@ public abstract class ASquadroGame extends AGame {
     @Override
     public ArrayList<String> possibleMoves(String role) {
         
-    	
-    	ArrayList<String> resultat = new ArrayList<String>() ; 
-    	String[] coupsPossibles = my_board.possibleMoves(role); 
-    	
-    	for(int i=0; i<coupsPossibles.length; i++) {
-    		resultat.add(coupsPossibles[i]);
-    	}
-    	
-        return resultat;
+    	    	return my_board.possibleMoves(role); 
     }
 
     @Override

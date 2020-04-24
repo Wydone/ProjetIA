@@ -1,5 +1,7 @@
 package iia.simpleGame.squadro;
 
+import java.util.ArrayList;
+
 public interface IPartie2 {
 
 	/** initialise un plateau à partir d’un fichier texte
@@ -22,7 +24,7 @@ public interface IPartie2 {
 	/** calcule les coups possibles pour le joueur <player> sur le plateau courant
 	* @param player le joueur qui joue, représenté par "vertical" ou "horizontal"
 	*/
-	public String[] possibleMoves(String player);
+	public ArrayList<String> possibleMoves(String player);
 	/** modifie le plateau en jouant le coup move avec la pièce choose
 	* @param move le coup à jouer, sous la forme "A4-C4"
 	* @param player le joueur qui joue, représenté par "vertical" ou "horizontal"

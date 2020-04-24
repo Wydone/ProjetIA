@@ -1,5 +1,6 @@
 package iia.simpleGame.base;
 
+
 import java.util.ArrayList;
 
 public interface IGame {
@@ -16,6 +17,4 @@ public interface IGame {
     ArrayList<IGame> successors(String role);
     boolean isValidMove(String move, String role);
     boolean isGameOver();
-
-
 }

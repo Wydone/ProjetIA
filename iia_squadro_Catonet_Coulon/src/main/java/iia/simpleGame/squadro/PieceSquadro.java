@@ -17,7 +17,12 @@ public class PieceSquadro {
 		this.statut = statut ; 
 		
 	}
-
+	
+	public PieceSquadro copy(int x, int y, int valeurDeplacement, char statut) {
+		return new PieceSquadro(x,y,valeurDeplacement, statut);
+	}
+	
+	
 	public int getX() {
 		return x;
 	}

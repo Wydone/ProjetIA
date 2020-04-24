@@ -2,6 +2,7 @@ package iia.simpleGame.squadro;
 
 
 
+import iia.simpleGame.algo.AlphaBeta;
 import iia.simpleGame.algo.IAlgo;
 import iia.simpleGame.algo.Minimax;
 import iia.simpleGame.base.AGame;
@@ -14,11 +15,29 @@ public class ChallengerSquadro implements IChallenger{
 	private String my_role ;
 	private Player myPlayer;
 	
+	public Player getMyPlayer() {
+		return myPlayer;
+	}
+
+
+	public void setMyPlayer(Player myPlayer) {
+		this.myPlayer = myPlayer;
+	}
+
 	//Le role de l'ennemi dans le plateau
 	private String my_enemy_role; 
 	
 	private IAlgo my_algo ; 
 	
+	public IAlgo getMy_algo() {
+		return my_algo;
+	}
+
+
+	public void setMy_algo(IAlgo my_algo) {
+		this.my_algo = my_algo;
+	}
+
 	private ASquadroGame myGame;  
 	
 	
@@ -40,10 +59,13 @@ public class ChallengerSquadro implements IChallenger{
 		
 		//LE CHOIX DES ALGO CE FONT DES LES CLASSES SQUADROGAMEH et SQUADROGAMEV
 		switch(role) {
-			case "HORIZONTAL": myGame =  new SquadroGameH(); my_enemy_role = ((SquadroGameH) myGame).getEnemyRole();myPlayer =((SquadroGameH) myGame).getMyPlayer();  break; 
-			
+			case "HORIZONTAL": myGame =  new SquadroGameH(); 
+							   my_enemy_role = ((SquadroGameH) myGame).getEnemyRole();
+							   myPlayer =((SquadroGameH) myGame).getMyPlayer(); 
+							   break; 
+							   
+							   
 			case "VERTICAL" :  myGame = new SquadroGameV(); my_enemy_role = ((SquadroGameV) myGame).getEnemyRole(); myPlayer =((SquadroGameV) myGame).getMyPlayer();  break; 
-			
 		}
 		
 		System.out.println("MON ROLE EST : " + role);
@@ -60,7 +82,6 @@ public class ChallengerSquadro implements IChallenger{
 		//On pas de conversion special dans la representaiton interne de notre plateau
 		System.out.println("IPLAY");
 		System.out.println("move : " + move);
-
 		System.out.println("Role : " + my_role);
 		
 		myGame.play(move, my_role);
@@ -85,6 +106,16 @@ public class ChallengerSquadro implements IChallenger{
 		
 		return "Victory is mine !";
 	}
+
+	public String getMy_role() {
+		return my_role;
+	}
+
+
+	public void setMy_role(String my_role) {
+		this.my_role = my_role;
+	}
+
 
 	@Override
 	public String defeat() {// TODO Auto-generated method stub

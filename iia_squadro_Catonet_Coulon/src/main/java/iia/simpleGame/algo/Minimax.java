@@ -22,7 +22,7 @@ public class Minimax implements IAlgo {
         roleMin = minRole;
         depthMax = maxDepth;
     }
-
+ 
     @Override
     public String bestMove(IGame game, String role) {
         System.out.println("[MiniMax]");
