@@ -39,7 +39,9 @@ public class SquadroGameV extends ASquadroGame {
     	//Heuristique de base
     	// objectif : avoir le plus de piece dans la position 'retour' et le plus de piece en position 'Dehors'
 
-    	int h = (this.getBoard().nbPieceAller(myRole) + (this.getBoard().nbPieceRetour(myRole)*10) + (this.getBoard().nbPieceDehors(myRole)*30)) - ((this.getBoard().nbPieceAller(enemyRole) + (this.getBoard().nbPieceRetour(enemyRole)*10) + (this.getBoard().nbPieceDehors(enemyRole)*30))); 
+    	//int h = (this.getBoard().nbPieceAller(myRole) + (this.getBoard().nbPieceRetour(myRole)) + (this.getBoard().nbPieceDehors(myRole)*10)) - ((this.getBoard().nbPieceAller(enemyRole) + (this.getBoard().nbPieceRetour(enemyRole)) + (this.getBoard().nbPieceDehors(enemyRole)*10))); 
+
+    	int h = this.getBoard().nbCoupRestantAvantVictoire(enemyRole) - this.getBoard().nbCoupRestantAvantVictoire(myRole) ;  
     	
         return h;
     }
@@ -53,4 +55,6 @@ public class SquadroGameV extends ASquadroGame {
     public Player getEnemyPlayer() {
     	return enemy;
     }
+    
+   
 }

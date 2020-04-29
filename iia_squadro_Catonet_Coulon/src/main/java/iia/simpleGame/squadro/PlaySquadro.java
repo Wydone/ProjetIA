@@ -6,7 +6,7 @@ import iia.simpleGame.algo.AlphaBeta;
 
 public class PlaySquadro {
     public static void main(String[] args) {
-      /*  System.out.println("Hello world !");
+        System.out.println("Hello world !");
         
         
         ChallengerSquadro c1 = new ChallengerSquadro(); 
@@ -15,13 +15,92 @@ public class PlaySquadro {
         c1.setRole("HORIZONTAL");
         c2.setRole("VERTICAL");
         
+        //System.out.println("c1 eval : " + c1.getGame().getValue("HORIZONTAL")) ; 
+        //System.out.println("TEST : "+c1.getGame().getBoard().nbCoupRestantAvantVictoire("HORIZONTAL"));
+        //System.out.println("TEST 2: "+c2.getGame().getBoard().nbCoupRestantAvantVictoire("VERTICALE"));
+        //System.out.println("c2 eval : " + c2.getGame().getValue("VERTICALE")) ; 
+        
+        /*
+        //System.out.println(c1.getGame().my_board.possibleMoves("HORIZONTAL")); 
+        c1.iPlay("A6-B6");
+        c1.getGame().my_board.printBoard();
+       // System.out.println("Mon eval : " + c1.getGame().getValue("VERTICALE")) ; 
+        
+         
+        
+       // c2.otherPlay("A6-B6");
+        //c2.getGame().my_board.printBoard(); 
+       // System.out.println("c2 eval : " + c2.getGame().getValue("VERTICAL")) ; 
+        
+       
+        
+       // System.out.println(c2.getGame().my_board.possibleMoves("VERTICAL")); 
+        c2.iPlay("F7-F4");
+        c2.getGame().my_board.printBoard();
+        c1.otherPlay("F7-F4");
+       // System.out.println("Mon eval pour c2 : " + c2.getGame().getValue("VERTICAL")) ; 
+        c1.getGame().my_board.printBoard();
+       
+        //c2.otherPlay("A7-B4");
+        
+        */
+        
+        //Test sur kes retour en arriere des pieces 
+        
+        c1.iPlay("A6-B6");
+        c2.otherPlay("A6-B6");
+        c1.iPlay("B6-C6");
+        c2.otherPlay("B6-C6");
+        c1.iPlay("C6-D6");
+        c2.otherPlay("C6-D6");
+        c1.iPlay("D6-E6");
+        c2.otherPlay("D6-E6");
+        c1.iPlay("E6-F6");
+        c2.otherPlay("E6-F6");
+        c1.iPlay("F6-G6");
+        c2.otherPlay("F6-G6");
+        
+        c2.iPlay("E7-E6");
+        c1.otherPlay("E7-E6");
+        c2.iPlay("C7-C6");
+        c1.otherPlay("C7-C6"); 
+        
+       
+        System.out.println(c1.getGame().possibleMoves("HORIZONTAL"));
+        
+        c1.iPlay("G6-D6");
+        c2.otherPlay("G6-D6");
+        
+        System.out.println("OK FIN TEST D'ERREUR 1 ------------------------------------");
+        
+        System.out.println(c2.getGame().possibleMoves("VERTICALE"));
+        c2.iPlay("C6-C5");
+        c1.otherPlay("C6-C5");
+        
+        c2.iPlay("C5-C4");
+        c1.otherPlay("C5-C4");
+        c2.iPlay("C4-C3");
+        c1.otherPlay("C4-C3");
+        c2.iPlay("C3-C2");
+        c1.otherPlay("C3-C2");
+        c2.iPlay("C2-C1");
+        c1.otherPlay("C2-C1");
+        
+        c2.iPlay("C1-C2");
+        c1.otherPlay("C1-C2");
+        
         c1.iPlay("A2-B2");
         c2.otherPlay("A2-B2");
         
-        */
-    	
-    	
-    	 ChallengerSquadro c1 = new ChallengerSquadro(); 
+        System.out.println(c1.getGame().possibleMoves("HORIZONTAL"));
+        //c1.iPlay("B2-C2");
+        //c2.otherPlay("B2-C2");
+        
+        //System.out.println(c1.getGame().possibleMoves("HORIZONTAL"));
+        //c1.iPlay("A4-C4");
+        //c2.otherPlay("A4-C4");
+        
+    	 /*ChallengerSquadro c1 = new ChallengerSquadro(); 
          ChallengerSquadro c2 = new ChallengerSquadro(); 
          c1.setRole("HORIZONTAL");
          c2.setRole("VERTICAL");
@@ -86,7 +165,7 @@ public class PlaySquadro {
         System.out.println("Fin de partie");
         System.out.println("Le joueur " + lesJoueurs[1-jnum] + " a gagn� cette partie !");
     
-
+		*/
 
         
     }

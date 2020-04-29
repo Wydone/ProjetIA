@@ -39,7 +39,9 @@ public class SquadroGameH extends ASquadroGame {
         // TODO heuristic for Horizontal player
     	
     	//MEME heuristique que l'autre classe
-    	int h = (this.getBoard().nbPieceAller(myRole) + (this.getBoard().nbPieceRetour(myRole)*10) + (this.getBoard().nbPieceDehors(myRole)*30)) - ((this.getBoard().nbPieceAller(enemyRole) + (this.getBoard().nbPieceRetour(enemyRole)*10) + (this.getBoard().nbPieceDehors(enemyRole)*30))); 
+    	//int h = (this.getBoard().nbPieceAller(myRole) + (this.getBoard().nbPieceRetour(myRole)) + (this.getBoard().nbPieceDehors(myRole)*10)) - ((this.getBoard().nbPieceAller(enemyRole) + (this.getBoard().nbPieceRetour(enemyRole)) + (this.getBoard().nbPieceDehors(enemyRole)*10))); 
+    	
+    	int h = this.getBoard().nbCoupRestantAvantVictoire(enemyRole) - this.getBoard().nbCoupRestantAvantVictoire(myRole); 
     	
     	
         return 0;

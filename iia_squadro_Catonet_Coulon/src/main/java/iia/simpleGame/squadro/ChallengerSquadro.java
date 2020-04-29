@@ -86,18 +86,23 @@ public class ChallengerSquadro implements IChallenger{
 		
 		myGame.play(move, my_role);
 		
+		myGame.my_board.printBoard();
+		System.out.println("END I play");
 		//myGame = myGame.play(move, myPlayer.getRole());
 	}
 
 	@Override
 	public void otherPlay(String move) {
-		System.out.println("TEST");
+		System.out.println("OTHER PLAYED : "+move);
 		myGame.play(move, my_enemy_role);
+		
+		myGame.my_board.printBoard();
+		System.out.println("END Other play");
 	}
 
 	@Override
 	public String bestMove() {
-		
+		System.out.println("MON BEST MOVE -------------------------------------------: ");
 		return my_algo.bestMove(myGame, my_role); 
 	}
 
@@ -126,6 +131,10 @@ public class ChallengerSquadro implements IChallenger{
 	public String tie() {
 	
 		return "tie";
+	}
+	
+	public ASquadroGame getGame() {
+		return myGame; 
 	}
 
 }

@@ -79,7 +79,7 @@ public class AlphaBeta implements IAlgo {
   // -------------------------------------------
    public String bestMove(SquadroBoard p) {
 
-	   System.out.println("PLAYER BESTMOVE  : " +this.PlayerMax);
+	   System.out.println("PLAYER BEST MOVE  : " +this.PlayerMax);
 	   return alphaBeta(PROFMAXDEFAUT, p); 
 
     }
