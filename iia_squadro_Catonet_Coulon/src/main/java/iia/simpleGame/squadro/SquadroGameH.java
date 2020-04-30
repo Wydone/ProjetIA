@@ -36,15 +36,27 @@ public class SquadroGameH extends ASquadroGame {
 
     @Override
     public int getValue(String role) {
+    	int h;
         // TODO heuristic for Horizontal player
     	
     	//MEME heuristique que l'autre classe
     	//int h = (this.getBoard().nbPieceAller(myRole) + (this.getBoard().nbPieceRetour(myRole)) + (this.getBoard().nbPieceDehors(myRole)*10)) - ((this.getBoard().nbPieceAller(enemyRole) + (this.getBoard().nbPieceRetour(enemyRole)) + (this.getBoard().nbPieceDehors(enemyRole)*10))); 
     	
-    	int h = this.getBoard().nbCoupRestantAvantVictoire(enemyRole) - this.getBoard().nbCoupRestantAvantVictoire(myRole); 
+    	//System.out.println("SquadroBoard H enemy : " + this.getBoard().nbCoupRestantAvantVictoire(enemyRole) ) ;
+    	//System.out.println("SquadroBoard H MOI : " + this.getBoard().nbCoupRestantAvantVictoire(myRole) ) ;
+    	//System.out.println("RES : " + (this.getBoard().nbCoupRestantAvantVictoire(enemyRole) - this.getBoard().nbCoupRestantAvantVictoire(myRole)) );
     	
+    	if(role.equals("HORIZONTAL")) {
     	
-        return 0;
+    		h = this.getBoard().nbCoupRestantAvantVictoire(enemyRole) - this.getBoard().nbCoupRestantAvantVictoire(myRole); 
+    		System.out.println("MAX HHHHHHHHHHHHHHHHHHHhh: " + h);
+    	
+    	}else { //si role = vertical
+    		h = this.getBoard().nbCoupRestantAvantVictoire(myRole) - this.getBoard().nbCoupRestantAvantVictoire(enemyRole); 
+    		System.out.println("MIN ------------------------------------------------------------------ : " + h);
+    	}
+    	
+        return h;
     }
     
     public String getEnemyRole() {

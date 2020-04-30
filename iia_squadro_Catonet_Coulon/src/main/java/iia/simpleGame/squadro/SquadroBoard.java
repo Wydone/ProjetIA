@@ -584,7 +584,7 @@ public class SquadroBoard implements IPartie2 {
 				
 				PieceSquadro pieceCourrante =listJ1.get(i);
 				int deplacementCourant = pieceCourrante.getValeurDeplacement();
-				System.out.println("DEPLACEMENT INIT : " + deplacementCourant);
+				//System.out.println("DEPLACEMENT INIT : " + deplacementCourant);
 				int colonneCourante = pieceCourrante.getX();
 
 				int valDeplacement = 0;
@@ -1031,7 +1031,7 @@ public class SquadroBoard implements IPartie2 {
 	public boolean gameOver() {
 		
 		ArrayList<String> tab = this.possibleMoves("HORIZONTAL");
-		ArrayList<String> tab2 = this.possibleMoves("VERTICALE");
+		ArrayList<String> tab2 = this.possibleMoves("VERTICAL");
 	    
 	        
 	    if(tab.size() >1 && tab2.size() >1) {
@@ -1325,40 +1325,55 @@ public class SquadroBoard implements IPartie2 {
 		int nbPieceDehors;
 		int nbCaseRestanteAvantR; 
 		int nbCaseRestanteAvantD; 
-		int nbCoups = 0;
+		float nbCoups = 0;
 		
 		if(role.equals("HORIZONTAL")) { // -> liste de coups J1
 
 			for(PieceSquadro p : listJ1) {
-				
+				//System.out.println("BOUCLE_______________________________________");
+				//System.out.println("STUATU DE LA PIECE : "+ p.getStatut());
 				nbCaseRestanteAvantR = 0; 
 				nbCaseRestanteAvantD = 0; 
 				
 				if(p.getStatut() == 'A') {
+					//System.out.println("IN a");
+					
 					nbCaseRestanteAvantR =  (TAILLE-1) - p.getX();
+					//System.out.println("case avant R : " + nbCaseRestanteAvantR);
+					//System.out.println("TEST---------nbCoups : "+nbCoups);
+					nbCoups += (((float)nbCaseRestanteAvantR) / p.getValeurDeplacement()); 
 					
-					nbCoups+= Math.ceil(((float)nbCaseRestanteAvantR) / p.getValeurDeplacement()); 
-					
-					//System.out.println("Resultat en nb de Coup : " + Math.ceil(((float)nbCaseRestanteAvantR) / p.getValeurDeplacement()));
-					
+					//System.out.println("Resultat en nb de Coup : " +((float)nbCaseRestanteAvantR) / p.getValeurDeplacement());
+					//System.out.println("NBCOUP : "+nbCoups);
 					//Compter le nombre de déplacment sur le retour
 					switch(p.getValeurDeplacement()) {
-						case 1 : nbCoups+= Math.ceil((TAILLE-1) / 3.0); break;
-						case 2 : nbCoups+= Math.ceil((TAILLE-1) / 2.0); break;
-						case 3 : nbCoups+= Math.ceil((TAILLE-1) / 1.0); break;
+						case 1 : nbCoups+= ((TAILLE-1) / 3.0); break;
+						case 2 : nbCoups+= ((TAILLE-1) / 2.0); break;
+						case 3 : nbCoups+= ((TAILLE-1) / 1.0); break;
 					}
+					
+				//System.out.println("NB COUP Final   =   " + nbCoups);	
 				
 				}else if(p.getStatut() == 'R') {
 					
-					nbCaseRestanteAvantD = p.getX() - (TAILLE) ; 
-					nbCoups += Math.ceil(((float)nbCaseRestanteAvantD) / p.getValeurDeplacement());
-					//System.out.println("Ajout sur le retour : " + Math.ceil(((float)nbCaseRestanteAvantD) / p.getValeurDeplacement()) );
+					//System.out.println("In R");
+					//System.out.println("Valeur de coups : "+nbCoups);
+					nbCaseRestanteAvantD = p.getX(); 
+					
+					//System.out.println("Nb case sur le R : " + nbCaseRestanteAvantD);
+					
+					nbCoups += ((float)nbCaseRestanteAvantD) / p.getValeurDeplacement();
+					
+					//System.out.println("Ajout sur le retour : " + ((float)nbCaseRestanteAvantD) / p.getValeurDeplacement() );
+					//System.out.println("NBCOUPS F : "+nbCoups);
 				} //else == 'D' alors on fait rien
 			}
 			
 		}else { //if role == "VERTICAL" -> lites de coups J2
 			
 			for(PieceSquadro p : listJ2) {
+				
+				//System.out.println("LIST J2");
 				
 				nbCaseRestanteAvantR = 0; 
 				nbCaseRestanteAvantD = 0; 
@@ -1369,27 +1384,30 @@ public class SquadroBoard implements IPartie2 {
 					nbCaseRestanteAvantR = p.getY() ;
 					//System.out.println("NB case restante avant retour : " + nbCaseRestanteAvantR );
 					//System.out.println("Resultat division : " + ((float)nbCaseRestanteAvantR) / p.getValeurDeplacement());
-					nbCoups+= Math.ceil(((float)nbCaseRestanteAvantR) / p.getValeurDeplacement()); 
-					//System.out.println("Resultat en nb de Coup : " + Math.ceil(((float)nbCaseRestanteAvantR) / p.getValeurDeplacement()));
-					
+					nbCoups+= ((float)nbCaseRestanteAvantR) / p.getValeurDeplacement(); 
+					//System.out.println("Resultat en nb de Coup : " + ((float)nbCaseRestanteAvantR) / p.getValeurDeplacement());
+					//System.out.println("NBCOUPSSS : " + nbCoups);
 					//Compter le nombre de déplacment sur le retour
 					switch(p.getValeurDeplacement()) {
-						case 1 : nbCoups+= Math.ceil((TAILLE-1) / 3.0); break;
-						case 2 : nbCoups+= Math.ceil((TAILLE-1) / 2.0); break;
-						case 3 : nbCoups+= Math.ceil((TAILLE-1) / 1.0); break;
+						case 1 : nbCoups+= ((TAILLE-1) / 3.0); break;
+						case 2 : nbCoups+= ((TAILLE-1) / 2.0); break;
+						case 3 : nbCoups+= ((TAILLE-1) / 1.0); break;
 					}
 				
 				}else if(p.getStatut() == 'R') {
 					
-					nbCaseRestanteAvantD =  (TAILLE) -  p.getY() ; 
-					nbCoups += Math.ceil(((float)nbCaseRestanteAvantD) / p.getValeurDeplacement());
+					nbCaseRestanteAvantD =  (TAILLE-1) -  p.getY() ; 
+					nbCoups += ((float)nbCaseRestanteAvantD) / p.getValeurDeplacement();
 					//System.out.println("Ajout sur le retour : " + Math.ceil(((float)nbCaseRestanteAvantD) / p.getValeurDeplacement()) );
 				} //else == 'D' alors on fait rien
+				
+				//System.out.println("NB COUP TOTAUX : " + nbCoups);
 			}
 			
 			
 		}
-		res = nbCoups;
+		//System.out.println("NB coups TOTAUX ====== " + nbCoups);
+		res = (int)nbCoups;
 		//System.out.println("Nombre de coups restant pour "+ role + " : " + res); 
 		
 		return res; 

@@ -35,13 +35,22 @@ public class SquadroGameV extends ASquadroGame {
  
     @Override
     public int getValue(String role) {
-        
+        int h ; 
     	//Heuristique de base
     	// objectif : avoir le plus de piece dans la position 'retour' et le plus de piece en position 'Dehors'
 
     	//int h = (this.getBoard().nbPieceAller(myRole) + (this.getBoard().nbPieceRetour(myRole)) + (this.getBoard().nbPieceDehors(myRole)*10)) - ((this.getBoard().nbPieceAller(enemyRole) + (this.getBoard().nbPieceRetour(enemyRole)) + (this.getBoard().nbPieceDehors(enemyRole)*10))); 
 
-    	int h = this.getBoard().nbCoupRestantAvantVictoire(enemyRole) - this.getBoard().nbCoupRestantAvantVictoire(myRole) ;  
+        if(role.equals("VERTICAL")) {
+        	
+        	h = this.getBoard().nbCoupRestantAvantVictoire(enemyRole) - this.getBoard().nbCoupRestantAvantVictoire(myRole) ;  
+        	System.out.println("MAX   VVVVVVVVVVVVVVVVVVVVV : " + h);
+        	
+        }else { //if role = Horizontal
+        	h = this.getBoard().nbCoupRestantAvantVictoire(myRole) - this.getBoard().nbCoupRestantAvantVictoire(enemyRole) ;  
+        	System.out.println("MIN    ------------------------------------------------------ : " + h);
+        }
+        
     	
         return h;
     }

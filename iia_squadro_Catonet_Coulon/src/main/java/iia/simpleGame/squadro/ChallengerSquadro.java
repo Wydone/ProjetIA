@@ -102,7 +102,7 @@ public class ChallengerSquadro implements IChallenger{
 
 	@Override
 	public String bestMove() {
-		System.out.println("MON BEST MOVE -------------------------------------------: ");
+		//System.out.println("MON BEST MOVE -------------------------------------------: ");
 		return my_algo.bestMove(myGame, my_role); 
 	}
 

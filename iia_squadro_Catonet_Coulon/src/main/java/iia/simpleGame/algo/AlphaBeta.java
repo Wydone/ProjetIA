@@ -119,7 +119,7 @@ public class AlphaBeta implements IAlgo {
 
     	SquadroBoard pCopy0 = p.copy(); 
     	
-
+    	System.out.println("Les coups possibles pour le joueur : " +pCopy0.possibleMoves(this.PlayerMax) );
     	for (String next_coup : pCopy0.possibleMoves(this.PlayerMax)) {
     		
 
@@ -132,13 +132,14 @@ public class AlphaBeta implements IAlgo {
        		int newVal = minMax(current_prof-1, pCopy, alpha, beta); 
     		
 
-        	if(newVal >= Max) {
+        	if(newVal > Max) {
        			MeilleurCoup = next_coup; 
        			Max = newVal; 
+       			//System.out.println("new max-----------------------------------------------");
         	}
        	}
     	
-    	System.out.println(MeilleurCoup);
+    	System.out.println("Best Coup trouvé par AlphaBeta :" +MeilleurCoup);
     	return MeilleurCoup; 
     }
     
@@ -150,7 +151,7 @@ public class AlphaBeta implements IAlgo {
        // System.out.println("DANS MAX!");
     
     	if((current_prof == 0) ||  (p.possibleMoves(this.PlayerMax).size()==0)) {
-    		if (this.PlayerMax == "HORIZONTAL") {
+    		if (this.PlayerMax.equals("HORIZONTAL")) {
         		return game.getValue(this.PlayerMax);
     		}else {
         		return game.getValue(this.PlayerMin);
@@ -182,15 +183,15 @@ public class AlphaBeta implements IAlgo {
   //      p.possibleMoves(this.PlayerMax).size();
         
     	if((current_prof == 0) || ( p.possibleMoves(this.PlayerMax).size()==0)) {
-            System.out.println("DANS IF MIN!");
+            //System.out.println("DANS IF MIN!");
 
-    		if (this.PlayerMin == "HORIZONTAL") {
+    		if (this.PlayerMin.equals("HORIZONTAL")) {
         		return game.getValue(this.PlayerMin);
     		}else {
         		return game.getValue(this.PlayerMax);
     		}
     	}else {
-            System.out.println("DANS IF MIN!");
+            //System.out.println("DANS IF MIN!");
 
     		for (String c : p.possibleMoves(this.PlayerMin)) {
     			SquadroBoard pCopy = p.copy(); 
