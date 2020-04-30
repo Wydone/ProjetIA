@@ -3,6 +3,8 @@ package iia.simpleGame.base;
 
 import java.util.ArrayList;
 
+import iia.simpleGame.squadro.SquadroBoard;
+
 public interface IGame {
     /*
     Symmetric +INFINITY and -INFINITY
@@ -17,4 +19,5 @@ public interface IGame {
     ArrayList<IGame> successors(String role);
     boolean isValidMove(String move, String role);
     boolean isGameOver();
+    int getValue(String role, SquadroBoard p);
 }

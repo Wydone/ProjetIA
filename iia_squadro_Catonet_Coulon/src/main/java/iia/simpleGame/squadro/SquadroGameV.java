@@ -55,6 +55,22 @@ public class SquadroGameV extends ASquadroGame {
         return h;
     }
     
+    public int getValue(String role, SquadroBoard b) {
+        int h ; 
+    	        if(role.equals("VERTICAL")) {
+        	
+        	h = b.nbCoupRestantAvantVictoire(enemyRole) - b.nbCoupRestantAvantVictoire(myRole) ;  
+        	System.out.println("MAX   VVVVVVVVVVVVVVVVVVVVV : " + h);
+        	
+        }else { //if role = Horizontal
+        	h = b.nbCoupRestantAvantVictoire(myRole) - b.nbCoupRestantAvantVictoire(enemyRole) ;  
+        	System.out.println("MIN    ------------------------------------------------------ : " + h);
+        }
+        
+    	
+        return h;
+    }
+    
     public String getEnemyRole() {
     	return enemyRole;
     }

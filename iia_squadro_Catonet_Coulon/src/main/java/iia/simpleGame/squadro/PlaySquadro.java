@@ -14,45 +14,32 @@ public class PlaySquadro {
 
         c1.setRole("HORIZONTAL");
         c2.setRole("VERTICAL");
-        System.out.println("H de c1 : "+c1.getGame().getValue("HORIZONTAL"));
-        System.out.println("H de c2 : "+c2.getGame().getValue("VERTICALE"));
         
+        c1.iPlay("A2-B2");
+        c2.otherPlay("A2-B2");
+        c1.iPlay("B2-C2");
+        c2.otherPlay("B2-C2");
+        
+        c2.iPlay("C7-C6");
+        c1.otherPlay("C7-C6");
+        c2.iPlay("C6-C5");
+        c1.otherPlay("C6-C5");
+        
+        System.out.println("H de c1 : "+c1.getGame().getValue("HORIZONTAL"));
+        System.out.println("H de c2 : "+c2.getGame().getValue("VERTICAL"));
+        
+        System.out.println("C1 possibles moves : " + c1.getGame().possibleMoves("HORIZONTAL"));
         
         c1.iPlay("A5-D5");
         c2.otherPlay("A5-D5");
-        c1.iPlay("D5-G5");
-        c2.otherPlay("D5-G5");
-        
-        c2.iPlay("F7-F4");
-        c1.otherPlay("F7-F4");
-        c2.iPlay("F4-F1");
-        c1.otherPlay("F4-F1");
-        c2.iPlay("B7-B4");
-        c1.otherPlay("B7-B4");
-        c2.iPlay("B4-B1");
-        c1.otherPlay("B4-B1");
-        
-        c2.iPlay("B1-B2");
-        c1.otherPlay("B1-B2");
-        c2.iPlay("F1-F2");
-        c1.otherPlay("F1-F2");
-        c2.iPlay("D7-D5");
-        c1.otherPlay("D7-D5");
-        
         
         System.out.println("H de c1 : "+c1.getGame().getValue("HORIZONTAL"));
-        System.out.println("H de c2 : "+c2.getGame().getValue("VERTICALE"));
+        System.out.println("H de c2 : "+c2.getGame().getValue("VERTICAL"));
         
-        System.out.println("POSSIBLE MOVES : ---------------------" + c1.getGame().my_board.possibleMoves("HORIZONTAL"));
-        
-        c1.iPlay("A2-C2");
-        c2.otherPlay("A2-C2");
-        
-        System.out.println("H de c1 : "+c1.getGame().getValue("HORIZONTAL"));
-        System.out.println("H de c2 : "+c2.getGame().getValue("VERTICALE"));
-        
-       
       
+       // c1.getGame().my_board.reverseCoup("A5-D5", "HORIZONTAL");
+      //  c1.getGame().my_board.printBoard();
+        
         //System.out.println("c1 eval : " + c1.getGame().getValue("HORIZONTAL")) ; 
         //System.out.println("TEST : "+c1.getGame().getBoard().nbCoupRestantAvantVictoire("HORIZONTAL"));
         //System.out.println("TEST 2: "+c2.getGame().getBoard().nbCoupRestantAvantVictoire("VERTICALE"));

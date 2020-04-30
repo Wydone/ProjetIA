@@ -49,10 +49,34 @@ public class SquadroGameH extends ASquadroGame {
     	if(role.equals("HORIZONTAL")) {
     	
     		h = this.getBoard().nbCoupRestantAvantVictoire(enemyRole) - this.getBoard().nbCoupRestantAvantVictoire(myRole); 
+    		System.out.println("Nombre de coups restant pour " + enemyRole + " est : " + this.getBoard().nbCoupRestantAvantVictoire(enemyRole));
+    		System.out.println("Nombre de coups restant pour " + myRole + " est : " + this.getBoard().nbCoupRestantAvantVictoire(myRole));
+    		
     		System.out.println("MAX HHHHHHHHHHHHHHHHHHHhh: " + h);
     	
     	}else { //si role = vertical
     		h = this.getBoard().nbCoupRestantAvantVictoire(myRole) - this.getBoard().nbCoupRestantAvantVictoire(enemyRole); 
+    		System.out.println("MIN ------------------------------------------------------------------ : " + h);
+    	}
+    	
+        return h;
+    }
+    
+    
+    public int getValue(String role, SquadroBoard b) {
+    	int h;
+        // TODO heuristic for Horizontal player
+    	
+    	if(role.equals("HORIZONTAL")) {
+    	
+    		h = b.nbCoupRestantAvantVictoire(enemyRole) - b.nbCoupRestantAvantVictoire(myRole); 
+    		System.out.println("Nombre de coups restant pour " + enemyRole + " est : " + b.nbCoupRestantAvantVictoire(enemyRole));
+    		System.out.println("Nombre de coups restant pour " + myRole + " est : " + b.nbCoupRestantAvantVictoire(myRole));
+    		
+    		System.out.println("MAX HHHHHHHHHHHHHHHHHHHhh: " + h);
+    	
+    	}else { //si role = vertical
+    		h = b.nbCoupRestantAvantVictoire(myRole) - b.nbCoupRestantAvantVictoire(enemyRole); 
     		System.out.println("MIN ------------------------------------------------------------------ : " + h);
     	}
     	

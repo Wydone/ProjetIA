@@ -152,9 +152,13 @@ public class AlphaBeta implements IAlgo {
     
     	if((current_prof == 0) ||  (p.possibleMoves(this.PlayerMax).size()==0)) {
     		if (this.PlayerMax.equals("HORIZONTAL")) {
-        		return game.getValue(this.PlayerMax);
+        		//return game.getValue(this.PlayerMax);
+        		return game.getValue(this.PlayerMax, p);
+    		
     		}else {
-        		return game.getValue(this.PlayerMin);
+        		//return game.getValue(this.PlayerMin);
+        		return game.getValue(this.PlayerMin, p);
+    		
     		}
     	}else {
 
@@ -186,9 +190,11 @@ public class AlphaBeta implements IAlgo {
             //System.out.println("DANS IF MIN!");
 
     		if (this.PlayerMin.equals("HORIZONTAL")) {
-        		return game.getValue(this.PlayerMin);
+        		//return game.getValue(this.PlayerMin);
+        		return game.getValue(this.PlayerMin, p);
     		}else {
-        		return game.getValue(this.PlayerMax);
+        		//return game.getValue(this.PlayerMax);
+    			return game.getValue(this.PlayerMax, p);
     		}
     	}else {
             //System.out.println("DANS IF MIN!");
