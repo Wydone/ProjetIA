@@ -1,6 +1,7 @@
 package iia.simpleGame.nim;
 
 import iia.simpleGame.base.IGame;
+import iia.simpleGame.squadro.SquadroBoard;
 
 public class NimGameFirst extends ANimGame{
 
@@ -35,5 +36,11 @@ public class NimGameFirst extends ANimGame{
         final int new_n =  Math.max(0, n_matches - n);
         return new NimGameFirst(new_n);
     }
+
+	@Override
+	public int getValue(String role, SquadroBoard p) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

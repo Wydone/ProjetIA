@@ -70,14 +70,14 @@ public class SquadroGameH extends ASquadroGame {
     	if(role.equals("HORIZONTAL")) {
     	
     		h = b.nbCoupRestantAvantVictoire(enemyRole) - b.nbCoupRestantAvantVictoire(myRole); 
-    		System.out.println("Nombre de coups restant pour " + enemyRole + " est : " + b.nbCoupRestantAvantVictoire(enemyRole));
-    		System.out.println("Nombre de coups restant pour " + myRole + " est : " + b.nbCoupRestantAvantVictoire(myRole));
+    		//System.out.println("Nombre de coups restant pour " + enemyRole + " est : " + b.nbCoupRestantAvantVictoire(enemyRole));
+    		//System.out.println("Nombre de coups restant pour " + myRole + " est : " + b.nbCoupRestantAvantVictoire(myRole));
     		
-    		System.out.println("MAX HHHHHHHHHHHHHHHHHHHhh: " + h);
+    		//System.out.println("MAX HHHHHHHHHHHHHHHHHHHhh: " + h);
     	
     	}else { //si role = vertical
     		h = b.nbCoupRestantAvantVictoire(myRole) - b.nbCoupRestantAvantVictoire(enemyRole); 
-    		System.out.println("MIN ------------------------------------------------------------------ : " + h);
+    		//System.out.println("MIN ------------------------------------------------------------------ : " + h);
     	}
     	
         return h;
@@ -93,4 +93,6 @@ public class SquadroGameH extends ASquadroGame {
     public Player getEnemyPlayer() {
     	return enemy;
     }
+
+
 }
