@@ -1415,8 +1415,40 @@ public class SquadroBoard implements IPartie2 {
 	
 	
 	
+	public String hashBoard() {
+		
+		String h = null;
+    	for(int i = 0; i<7; i++) {
+        	for (int j=0; j<7 ; j++) {
+        		h+=board[i][j];
+        	}
+        }
+    	
+    	return h;
+    }
 	
+	public String convertIntegerToString(Integer coordonee[]) {
+		String coordonnneeString = "";
+		
+		switch(coordonee[0]) {
+			
+			//Si la coordonnée est une lettre
+			case 0 : coordonnneeString="A"; break; 
+			case 1 : coordonnneeString="B"; break;
+			case 2 : coordonnneeString="C"; break; 
+			case 3 : coordonnneeString="D"; break; 
+			case 4 : coordonnneeString="E"; break;
+			case 5 : coordonnneeString="F"; break; 
+			case 6 : coordonnneeString="G"; break; 
+			default:coordonnneeString="ERROR"; break;
+
+		}
+		
+		coordonnneeString= coordonnneeString + Integer.toString(coordonee[1]+1);
+		
+		return 	coordonnneeString;
 	
+	}
 	
 	//---------------------------------------
 	// MAIN

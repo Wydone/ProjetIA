@@ -3,6 +3,7 @@ package iia.simpleGame.squadro;
 
 
 import iia.simpleGame.algo.AlphaBeta;
+import iia.simpleGame.algo.AlphaBetaV2;
 import iia.simpleGame.algo.IAlgo;
 import iia.simpleGame.algo.Minimax;
 import iia.simpleGame.base.AGame;

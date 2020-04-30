@@ -1,6 +1,7 @@
 package iia.simpleGame.squadro;
 
 import iia.simpleGame.algo.AlphaBeta;
+import iia.simpleGame.algo.AlphaBetaV2;
 import iia.simpleGame.algo.Minimax;
 import iia.simpleGame.base.Player;
 
@@ -25,9 +26,9 @@ public class SquadroGameH extends ASquadroGame {
     	
     	
     	//Algo alphabeta
-    	this.me = new Player("Me", myRole, new AlphaBeta(this,myRole, enemyRole));
+    	this.me = new Player("Me", myRole, new AlphaBetaV2(this,myRole, enemyRole));
     	
-    	this.enemy = new Player("Enemy", enemyRole, new  AlphaBeta(this,enemyRole, myRole)); 
+    	this.enemy = new Player("Enemy", enemyRole, new  AlphaBetaV2(this,enemyRole, myRole)); 
     	
     	my_board.printBoard();
     	

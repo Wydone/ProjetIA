@@ -11,6 +11,7 @@ public class PlaySquadro {
         
         ChallengerSquadro c1 = new ChallengerSquadro(); 
         ChallengerSquadro c2 = new ChallengerSquadro(); 
+        //c1.tie();
 
         c1.setRole("HORIZONTAL");
         c2.setRole("VERTICAL");
@@ -35,7 +36,8 @@ public class PlaySquadro {
         
         System.out.println("H de c1 : "+c1.getGame().getValue("HORIZONTAL"));
         System.out.println("H de c2 : "+c2.getGame().getValue("VERTICAL"));
-        
+        System.out.println("TEST");
+        System.out.println(c1.bestMove());
       
        // c1.getGame().my_board.reverseCoup("A5-D5", "HORIZONTAL");
       //  c1.getGame().my_board.printBoard();

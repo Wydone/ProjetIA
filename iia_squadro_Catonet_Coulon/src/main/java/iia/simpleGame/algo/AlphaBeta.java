@@ -18,7 +18,7 @@ public class AlphaBeta implements IAlgo {
 	
     /** La profondeur de recherche par d�faut
      */
-    private final static int PROFMAXDEFAUT = 8;
+    private final static int PROFMAXDEFAUT = 10;
 
    
     // -------------------------------------------
