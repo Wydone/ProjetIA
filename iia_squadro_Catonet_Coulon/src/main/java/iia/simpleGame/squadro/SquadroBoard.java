@@ -573,7 +573,7 @@ public class SquadroBoard implements IPartie2 {
 	//Retourne la liste des mouvement possible pour un joueur
 	@Override
 	public ArrayList<String> possibleMoves(String player) {
-		System.out.println("dans possibleMoves. Player : " + player);
+		//System.out.println("dans possibleMoves. Player : " + player);
 
 		ArrayList<String> possibleMoves = new ArrayList<String>();
 		String possibleMove ="";
@@ -845,7 +845,9 @@ public class SquadroBoard implements IPartie2 {
 	
 	@Override
 	public void play(String move, String role) {
-		
+		//this.printBoard();
+		//System.out.println("Mon move : " + move + ", role : " + role);
+		//System.out.println("Mes possibles move : " + this.possibleMoves(role));
 		String positionCourante[] = {Character.toString(move.charAt(0)),Character.toString(move.charAt(1))};
 		String newPosition[] = {Character.toString(move.charAt(3)),Character.toString(move.charAt(4))};
 		ArrayList<PieceSquadro> listPieceCourante = new ArrayList<PieceSquadro>() ;
@@ -856,7 +858,7 @@ public class SquadroBoard implements IPartie2 {
 		char symbole = ' ';
 		boolean nonTrouve = true;
 		
-		System.out.println("DANS la methode PLAY de SQuadroBoard MOVE : " + move + ", ROLE : " + role);
+		//System.out.println("DANS la methode PLAY de SQuadroBoard MOVE : " + move + ", ROLE : " + role);
 		
 		if(role.equals("HORIZONTAL")) {//if(role.equals("HORIZONTAL") ) {
 			listPieceCourante = listJ1;
@@ -1018,7 +1020,7 @@ public class SquadroBoard implements IPartie2 {
 
 		}
 		
-		System.out.println("MOVE PLAYED : "+move);
+		//System.out.println("MOVE PLAYED : "+move);
 
 		//Met a jour le plateau
 		board[tabInt_posCourante[1]][tabInt_posCourante[0]]= '.';
@@ -1309,7 +1311,7 @@ public class SquadroBoard implements IPartie2 {
 
 		}
 		
-		System.out.println("MOVE PLAYED : "+move);
+		//System.out.println("MOVE PLAYED : "+move);
 
 		//Met a jour le plateau
 		board[tabInt_posCourante[1]][tabInt_posCourante[0]]= '.';

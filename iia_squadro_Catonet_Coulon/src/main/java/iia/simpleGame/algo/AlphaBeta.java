@@ -18,7 +18,7 @@ public class AlphaBeta implements IAlgo {
 	
     /** La profondeur de recherche par d�faut
      */
-    private final static int PROFMAXDEFAUT = 10;
+    private final static int PROFMAXDEFAUT = 9;
 
    
     // -------------------------------------------
@@ -186,7 +186,7 @@ public class AlphaBeta implements IAlgo {
         
   //      p.possibleMoves(this.PlayerMax).size();
         
-    	if((current_prof == 0) || ( p.possibleMoves(this.PlayerMax).size()==0)) {
+    	if((current_prof == 0) || ( p.possibleMoves(this.PlayerMin).size()==0)) {
             //System.out.println("DANS IF MIN!");
 
     		if (this.PlayerMin.equals("HORIZONTAL")) {

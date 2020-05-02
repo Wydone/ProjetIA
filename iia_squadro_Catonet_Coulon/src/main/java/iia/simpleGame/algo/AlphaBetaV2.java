@@ -21,7 +21,7 @@ public class AlphaBetaV2 implements IAlgo {
 	
     /** La profondeur de recherche par d�faut
      */
-    private final static int PROFMAXDEFAUT = 9;
+    private final static int PROFMAXDEFAUT = 0;
 
    
     // -------------------------------------------
@@ -56,7 +56,10 @@ public class AlphaBetaV2 implements IAlgo {
     /** Le nombre de feuilles �valu�es par l'algorithme
      */
     private int nbfeuilles;
-    private int timeMax = 500;
+    
+    private String idHashTable;
+
+    private int timeMax = 1000;
     private ArrayList<String> pileCoup = new ArrayList<String>();
 
 
@@ -108,6 +111,7 @@ public class AlphaBetaV2 implements IAlgo {
 
 
 
+    
   // -------------------------------------------
   // M�thodes internes
   // -------------------------------------------
@@ -127,22 +131,19 @@ public class AlphaBetaV2 implements IAlgo {
     	SquadroBoard pCopy0 = p.copy(); 
     	
 
-    	while((int)(timeMax/2) >= (elapsedTime - startTime)) {
+    	while((((int)(timeMax/1)) >= (elapsedTime - startTime) ) && (current_prof <= 40)) {
             current_prof++;
 
 	    	for (String next_coup : pCopy0.possibleMoves(this.PlayerMax)) {
-	    		
-	    		/*if( !( (int)(timeMax/2) >= (elapsedTime - startTime))) {
-	    			break;
-	    		}*/
-	    		
+		 	 //   System.out.println("cordonneeInt2 BETA : " + this.PlayerMax + " : " + pCopy0.possibleMoves(this.PlayerMax));
+
 	    		//pileCoup.add(next_coup);
 	    		SquadroBoard pCopy = pCopy0.copy(); 
 	    		pCopy.play(next_coup, this.PlayerMax);
 	    		
 	       		int newVal = minMax(current_prof-1, pCopy, alpha, beta); 
 	    		
-	        	if(newVal >= Max) {
+	        	if(newVal > Max) {
 	       			MeilleurCoup = next_coup; 
 	       			Max = newVal; 
 	        	}
@@ -155,6 +156,7 @@ public class AlphaBetaV2 implements IAlgo {
     	}
     	
     	System.out.println(MeilleurCoup);
+        System.out.println("Profondeur : " + current_prof);
         System.out.println("Dure coup en ms : " + (elapsedTime - startTime));
 
     	return MeilleurCoup; 
@@ -165,7 +167,7 @@ public class AlphaBetaV2 implements IAlgo {
     
     
     public int maxMin (int current_prof, SquadroBoard p, int alpah, int beta) {
-       // System.out.println("DANS MAX!");
+       //System.out.println("maxMin!");
     	boolean recalcule = false;
 
     	if((current_prof == 0) ||  (p.possibleMoves(this.PlayerMax).size()==0)) {
@@ -176,10 +178,12 @@ public class AlphaBetaV2 implements IAlgo {
     		}
     	}else {
 
-            if (hashJ2.containsKey(p.hashBoard()) ) {
+    		idHashTable = this.PlayerMax+p.hashBoard();
+
+            if (hashJ1.containsKey(idHashTable) ) {
                 //System.out.println("LINEAIRE!MAX");
 
-            	Integer[] tab = hashJ2.get(p.hashBoard());
+            	Integer[] tab = hashJ1.get(idHashTable);
                 Integer profondeur=0;
                 
                 profondeur = tab[0];
@@ -192,8 +196,9 @@ public class AlphaBetaV2 implements IAlgo {
     				String meuilleurCoup = p.convertIntegerToString(t1) + "-" + p.convertIntegerToString(t2);
         			SquadroBoard pCopy = p.copy(); 
         			
-                    System.out.println("MEUILLEUR COUPMAX : " + meuilleurCoup);
+        			//System.out.println("MaxMin play coup  de hashMap : " + meuilleurCoup);
         			pCopy.play(meuilleurCoup, this.PlayerMax);
+        			
         			beta = Math.min(beta, maxMin(current_prof-1, pCopy,alpah, beta)); 
         			
                 }else {
@@ -232,9 +237,9 @@ public class AlphaBetaV2 implements IAlgo {
 		    				return beta;
 		    			}
 		    							
-	    		}
+			    	}
 			    	
-
+		 	    //System.out.println("cordonneeInt2 BETA : " + this.PlayerMax + " : " + p.possibleMoves(this.PlayerMax));
 	    		String[] char1 = {meuilleurCoup.substring(0, 1), meuilleurCoup.substring(1, 2)};	  
 	    		String[] char2 = {meuilleurCoup.substring(3, 4), meuilleurCoup.substring(4, 5) };	    		
 	
@@ -243,7 +248,7 @@ public class AlphaBetaV2 implements IAlgo {
 	    		int[] cordonneeInt2 = p.convertStringToInt(char2);
 	
 	    		Integer[] tabhash = {current_prof,beta, cordonneeInt1[0],cordonneeInt1[1], cordonneeInt2[0],cordonneeInt2[1]};
-	    		hashJ2.put(p.hashBoard(), tabhash ) ;
+	    		hashJ1.put(this.PlayerMax+p.hashBoard(), tabhash ) ;
 	    		
 	    	
             }
@@ -257,11 +262,11 @@ public class AlphaBetaV2 implements IAlgo {
     
     
     public int minMax (int current_prof, SquadroBoard p, int alpah, int beta) {
-        
+       // System.out.println("minMax");
   //      p.possibleMoves(this.PlayerMax).size();
     	boolean recalcule = false;
 
-    	if((current_prof == 0) || ( p.possibleMoves(this.PlayerMax).size()==0)) {
+    	if((current_prof == 0) || ( p.possibleMoves(this.PlayerMin).size()==0)) {
     		
 
     		if (this.PlayerMin.equals("HORIZONTAL")) {
@@ -273,10 +278,11 @@ public class AlphaBetaV2 implements IAlgo {
     		
     	}else {
             
-            if (hashJ1.containsKey(p.hashBoard()) ) {
+    		idHashTable = this.PlayerMin+p.hashBoard();
+            if (hashJ1.containsKey(idHashTable) ) {
               //  System.out.println("LINEAIRE!");
 
-            	Integer[] tab = hashJ1.get(p.hashBoard());
+            	Integer[] tab = hashJ1.get(idHashTable);
                 Integer profondeur=0;
                 
                 profondeur = tab[0];
@@ -288,6 +294,7 @@ public class AlphaBetaV2 implements IAlgo {
                     
     				String meuilleurCoup = p.convertIntegerToString(t1) + "-" + p.convertIntegerToString(t2);
         			SquadroBoard pCopy = p.copy(); 
+        			//System.out.println("MinMax play coup  de hashMap : " + meuilleurCoup);
         			pCopy.play(meuilleurCoup, this.PlayerMin);
         			beta = Math.min(beta, maxMin(current_prof-1, pCopy,alpah, beta)); 
         			
@@ -321,7 +328,7 @@ public class AlphaBetaV2 implements IAlgo {
 	    			
 	    			
 	    			
-	    			if (minBeta > beta) {
+	    			if (minBeta >= beta) {
 	    				meuilleurCoup = c;
 	    				minBeta=beta;
 	    			}
@@ -332,8 +339,16 @@ public class AlphaBetaV2 implements IAlgo {
 	    				return alpah;
 	    			}
 	    		}
-	    			    		
 	    		
+	    		if(meuilleurCoup.equals("")) {
+	    		//	   System.out.println("this.PlayerMin : " + this.PlayerMin);
+	    		//	   System.out.println("cordonneeInt2 string to int : " + meuilleurCoup);
+	    		//	   System.out.println("cordonneeInt2 BETA : " + p.possibleMoves(this.PlayerMin));
+
+	    		}
+	    		
+ 			   //System.out.println("cordonneeInt2 BETA : " + this.PlayerMin + " : " + p.possibleMoves(this.PlayerMin));
+
 	    		String[] char1 = {meuilleurCoup.substring(0, 1), meuilleurCoup.substring(1, 2)};	  
 	    		String[] char2 = {meuilleurCoup.substring(3, 4), meuilleurCoup.substring(4, 5) };	    		
 
@@ -343,7 +358,7 @@ public class AlphaBetaV2 implements IAlgo {
 	    	   // System.out.println("cordonneeInt2 string to int : " + meuilleurCoup);
 
 	    		Integer[] tabhash = {current_prof,beta, cordonneeInt1[0],cordonneeInt1[1], cordonneeInt2[0],cordonneeInt2[1]};
-	    		hashJ1.put(p.hashBoard(), tabhash ) ;
+	    		hashJ1.put(this.PlayerMin+p.hashBoard(), tabhash ) ;
 	    		
 
 	    		
