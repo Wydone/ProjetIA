@@ -152,7 +152,11 @@ public class AlphaBetaV2 implements IAlgo {
        	       	}
             	
             }catch(Exception e) {
-            	System.out.println("ERREUR INCONNU");
+            	System.out.println("Catch");
+            	System.out.println(MeilleurCoup);
+                System.out.println("Profondeur : " + current_prof);
+                System.out.println("Dure coup en ms : " + (elapsedTime - startTime));
+
             	return MeilleurCoup; 
             }
 	    	
