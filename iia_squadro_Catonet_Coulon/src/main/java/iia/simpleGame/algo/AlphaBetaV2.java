@@ -59,7 +59,7 @@ public class AlphaBetaV2 implements IAlgo {
     
     private String idHashTable;
 
-    private int timeMax = 1000;
+    private int timeMax = 2000;
     private ArrayList<String> pileCoup = new ArrayList<String>();
 
 
@@ -133,22 +133,29 @@ public class AlphaBetaV2 implements IAlgo {
 
     	while((((int)(timeMax/1)) >= (elapsedTime - startTime) ) && (current_prof <= 40)) {
             current_prof++;
+            try {
+            	
+            	for (String next_coup : pCopy0.possibleMoves(this.PlayerMax)) {
+       		 	 //   System.out.println("cordonneeInt2 BETA : " + this.PlayerMax + " : " + pCopy0.possibleMoves(this.PlayerMax));
 
-	    	for (String next_coup : pCopy0.possibleMoves(this.PlayerMax)) {
-		 	 //   System.out.println("cordonneeInt2 BETA : " + this.PlayerMax + " : " + pCopy0.possibleMoves(this.PlayerMax));
-
-	    		//pileCoup.add(next_coup);
-	    		SquadroBoard pCopy = pCopy0.copy(); 
-	    		pCopy.play(next_coup, this.PlayerMax);
-	    		
-	       		int newVal = minMax(current_prof-1, pCopy, alpha, beta); 
-	    		
-	        	if(newVal > Max) {
-	       			MeilleurCoup = next_coup; 
-	       			Max = newVal; 
-	        	}
-	      
-	       	}
+       	    		//pileCoup.add(next_coup);
+       	    		SquadroBoard pCopy = pCopy0.copy(); 
+       	    		pCopy.play(next_coup, this.PlayerMax);
+       	    		
+       	       		int newVal = minMax(current_prof-1, pCopy, alpha, beta); 
+       	    		
+       	        	if(newVal > Max) {
+       	       			MeilleurCoup = next_coup; 
+       	       			Max = newVal; 
+       	        	}
+       	      
+       	       	}
+            	
+            }catch(Exception e) {
+            	System.out.println("ERREUR INCONNU");
+            	return MeilleurCoup; 
+            }
+	    	
 	    	
 	       elapsedTime = (new Date()).getTime();
            //System.out.println("\n\n FINNNNNN FORRRRRRR current_prof \n\n " + current_prof );
