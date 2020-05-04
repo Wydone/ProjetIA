@@ -35,35 +35,36 @@ public class SquadroGameH extends ASquadroGame {
     	
     }
 
+    /*
+     * Cette version pour recupperer l'heuristique n'est pas à utiliser
+     */
+    //NE PAS UTILISER !!!
     @Override
     public int getValue(String role) {
     	int h;
-        // TODO heuristic for Horizontal player
-    	
-    	//MEME heuristique que l'autre classe
-    	//int h = (this.getBoard().nbPieceAller(myRole) + (this.getBoard().nbPieceRetour(myRole)) + (this.getBoard().nbPieceDehors(myRole)*10)) - ((this.getBoard().nbPieceAller(enemyRole) + (this.getBoard().nbPieceRetour(enemyRole)) + (this.getBoard().nbPieceDehors(enemyRole)*10))); 
-    	
-    	//System.out.println("SquadroBoard H enemy : " + this.getBoard().nbCoupRestantAvantVictoire(enemyRole) ) ;
-    	//System.out.println("SquadroBoard H MOI : " + this.getBoard().nbCoupRestantAvantVictoire(myRole) ) ;
-    	//System.out.println("RES : " + (this.getBoard().nbCoupRestantAvantVictoire(enemyRole) - this.getBoard().nbCoupRestantAvantVictoire(myRole)) );
-    	
+      
     	if(role.equals("HORIZONTAL")) {
     	
     		h = this.getBoard().nbCoupRestantAvantVictoire(enemyRole) - this.getBoard().nbCoupRestantAvantVictoire(myRole); 
-    		System.out.println("Nombre de coups restant pour " + enemyRole + " est : " + this.getBoard().nbCoupRestantAvantVictoire(enemyRole));
-    		System.out.println("Nombre de coups restant pour " + myRole + " est : " + this.getBoard().nbCoupRestantAvantVictoire(myRole));
+    		//System.out.println("Nombre de coups restant pour " + enemyRole + " est : " + this.getBoard().nbCoupRestantAvantVictoire(enemyRole));
+    		//System.out.println("Nombre de coups restant pour " + myRole + " est : " + this.getBoard().nbCoupRestantAvantVictoire(myRole));
     		
-    		System.out.println("MAX HHHHHHHHHHHHHHHHHHHhh: " + h);
+    		//System.out.println("MAX HHHHHHHHHHHHHHHHHHHhh: " + h);
     	
     	}else { //si role = vertical
     		h = this.getBoard().nbCoupRestantAvantVictoire(myRole) - this.getBoard().nbCoupRestantAvantVictoire(enemyRole); 
-    		System.out.println("MIN ------------------------------------------------------------------ : " + h);
+    		//System.out.println("MIN ------------------------------------------------------------------ : " + h);
     	}
     	
         return h;
     }
     
-    
+    /*
+     * Heuritique qui commpare mon nombre de coups restant et le nombre de coups restant pour l'adversaire avant de gagner
+     *	@param Role , SquadroBoard
+     *	@return int heurisitique
+     */
+    //A UTILISER !!
     public int getValue(String role, SquadroBoard b) {
     	int h;
         // TODO heuristic for Horizontal player
@@ -83,6 +84,11 @@ public class SquadroGameH extends ASquadroGame {
     	
         return h;
     }
+    
+    //----------------------------------------------------------
+    // GETTER & SETTER 
+    //----------------------------------------------------------
+    
     
     public String getEnemyRole() {
     	return enemyRole;

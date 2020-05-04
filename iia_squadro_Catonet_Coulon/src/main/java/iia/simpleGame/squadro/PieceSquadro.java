@@ -3,8 +3,8 @@ package iia.simpleGame.squadro;
 
 public class PieceSquadro {
 	
-	private int x ; 
-	private int y ; 
+	private int x ; //position x de la piece
+	private int y ; //position y de la piece
 	
 	private int valeurDeplacement ; 
 	private char statut ; // A = aller , R = retour , D = en dehors du plateu 

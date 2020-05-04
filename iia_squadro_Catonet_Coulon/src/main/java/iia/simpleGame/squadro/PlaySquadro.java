@@ -8,6 +8,8 @@ import iia.simpleGame.algo.AlphaBeta;
 import iia.simpleGame.algo.AlphaBetaV2;
 
 public class PlaySquadro {
+	
+	//Main pour faire nos tests
     public static void main(String[] args) {
         System.out.println("Hello world !");
         

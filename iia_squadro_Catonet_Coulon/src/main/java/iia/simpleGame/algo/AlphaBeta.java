@@ -12,13 +12,17 @@ import iia.simpleGame.squadro.SquadroGameH;
 import iia.simpleGame.squadro.SquadroGameV;
 
 
-
+/*
+ * Il s'agit de la première version de notre AlphaBeta. 
+ * C'est un alphaBeta classique qui nous permet d'aller à une profondeur de 9 en environ 8 secondes
+ * 
+ */
 public class AlphaBeta implements IAlgo {
 	
 	
     /** La profondeur de recherche par d�faut
      */
-    private final static int PROFMAXDEFAUT = 9;
+    private final static int PROFMAXDEFAUT = 9; 
 
    
     // -------------------------------------------
@@ -85,6 +89,9 @@ public class AlphaBeta implements IAlgo {
     }
    
    
+   	/*
+   	 * Return le best move après l'execution de l'algo AlphaBeta
+   	 */
 	@Override
 	public String bestMove(IGame game, String role) {
 		
@@ -107,8 +114,11 @@ public class AlphaBeta implements IAlgo {
   // M�thodes internes
   // -------------------------------------------
 
-    //A vous de jouer pour implanter Minimax
-    
+
+    /*
+     * Algo Alpha Beta
+     * @return Best move dans la liste des coups possibles
+     */
     public String alphaBeta(int current_prof, SquadroBoard p) {
     	
     	
@@ -146,7 +156,9 @@ public class AlphaBeta implements IAlgo {
     
     
     
-    
+    /*
+     * Max min utilisé par alphaBeta 
+     */
     public int maxMin (int current_prof, SquadroBoard p, int alpah, int beta) {
        // System.out.println("DANS MAX!");
     
@@ -182,9 +194,9 @@ public class AlphaBeta implements IAlgo {
     
     
     public int minMax (int current_prof, SquadroBoard p, int alpah, int beta) {
-       // System.out.println("DANS MIN!");
+    	// System.out.println("DANS MIN!");
         
-  //      p.possibleMoves(this.PlayerMax).size();
+    	//  p.possibleMoves(this.PlayerMax).size();
         
     	if((current_prof == 0) || ( p.possibleMoves(this.PlayerMin).size()==0)) {
             //System.out.println("DANS IF MIN!");
@@ -219,7 +231,7 @@ public class AlphaBeta implements IAlgo {
     }
     
 
-
+    
 	public ArrayList<String> getPileCoups() {
 		return pileCoups;
 	}

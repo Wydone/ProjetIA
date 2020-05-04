@@ -38,7 +38,9 @@ public class SquadroBoard implements IPartie2 {
     public String nextPlayer = ""; 
     
     
-    
+    /*
+     * Constructeur de classe
+     */
     public SquadroBoard() { //Creation du plateau initial 
     	
     	this.board = new char[TAILLE][TAILLE]; 
@@ -68,12 +70,20 @@ public class SquadroBoard implements IPartie2 {
 	
     }
     
+    /*
+     * Coper le plateau en parametre
+     * @return SquadroBoard
+     */
 	public SquadroBoard copy() {
 		
 		return new SquadroBoard(this.board, this.copy(this.listJ1), this.copy(this.listJ2));
 	}
 	
-
+	/*
+	 * Copier la liste des pieces du plateau
+	 * @return ArrayList<PieceSquadro>
+	 * @param ArrayList<PieceSquadro>
+	 */
 	public ArrayList<PieceSquadro> copy(ArrayList<PieceSquadro> listeDepart) {
 		ArrayList<PieceSquadro> newList = new ArrayList<PieceSquadro>();
 
@@ -84,6 +94,9 @@ public class SquadroBoard implements IPartie2 {
 		return newList;
 	}
 	
+	/*
+	 * Contructeur 2 de classe à partir d'un plateau existant
+	 */
 	public SquadroBoard(char depuis[][], ArrayList<PieceSquadro> listJ1, ArrayList<PieceSquadro> listJ2) {
 		
 		board = new char[TAILLE][TAILLE]; 
@@ -103,7 +116,9 @@ public class SquadroBoard implements IPartie2 {
 	}
 	    
 	
-	
+	/*
+	 * Connaitre la valeur de déplacement des cases Joueur Horizontal
+	 */
     public int valDenInitJ1(int i) {
 		int valDepl = 0; 
 
@@ -118,7 +133,9 @@ public class SquadroBoard implements IPartie2 {
     	return valDepl;
     }
 	    
-    
+    /*
+	 * Connaitre la valeur de déplacement des cases Joueur Vertical
+	 */
     public int valDenInitJ2(int i) {
 		int valDepl = 0; 
 
@@ -134,7 +151,7 @@ public class SquadroBoard implements IPartie2 {
     }
     
     
-	    //Création à partir d'un plateau existant 
+	//Création à partir d'un plateau existant 
     public SquadroBoard(char depuis[][]) {
     	
     	this.board = new char[TAILLE][TAILLE]; 
@@ -1050,6 +1067,9 @@ public class SquadroBoard implements IPartie2 {
 	        
 	}
 	
+	/*
+	 * Afficher le plateau
+	 */
 	public void printBoard() {
 		
     	for(int i = 0; i<7; i++) {
@@ -1065,7 +1085,9 @@ public class SquadroBoard implements IPartie2 {
 		this.nextPlayer = nextP;
 	}
 	
-	
+	/*
+	 * Nombre de piece sur l'aller
+	 */
 	public int nbPieceAller(String role) {
 		
 		int result = 0; 
@@ -1093,6 +1115,9 @@ public class SquadroBoard implements IPartie2 {
 		return result; 
 	}
 	
+	/*
+	 * Nombre de piece sur la phase retour
+	 */
 	public int nbPieceRetour(String role) {
 		
 		int result = 0; 
@@ -1120,6 +1145,9 @@ public class SquadroBoard implements IPartie2 {
 		return result; 
 	}
 	
+	/*
+	 * Nombre de piece en dehors du plateau
+	 */
 	public int nbPieceDehors(String role) {
 		
 		int result = 0;
@@ -1321,6 +1349,11 @@ public class SquadroBoard implements IPartie2 {
 		
 	}
 	
+	/*
+	 * Nombre de coup du joueur avant sa victoire
+	 * @return int
+	 * @param String Role
+	 */
 	public int nbCoupRestantAvantVictoire(String role) {
 			
 		int res ; 
@@ -1416,7 +1449,9 @@ public class SquadroBoard implements IPartie2 {
 	}
 	
 	
-	
+	/*
+	 * Table de hash
+	 */
 	public String hashBoard() {
 		
 		String h = null;
@@ -1428,6 +1463,7 @@ public class SquadroBoard implements IPartie2 {
     	
     	return h;
     }
+	
 	
 	public String convertIntegerToString(Integer coordonee[]) {
 		String coordonnneeString = "";

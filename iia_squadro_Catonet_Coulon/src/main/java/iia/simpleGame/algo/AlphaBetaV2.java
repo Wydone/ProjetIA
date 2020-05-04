@@ -21,7 +21,7 @@ public class AlphaBetaV2 implements IAlgo {
 	
     /** La profondeur de recherche par d�faut
      */
-    private final static int PROFMAXDEFAUT = 0;
+    private final static int PROFMAXDEFAUT = 0; // Profondeur qui est incremental
 
    
     // -------------------------------------------
@@ -38,8 +38,8 @@ public class AlphaBetaV2 implements IAlgo {
    private SquadroGameV h_V;
    private IGame game;
    private ArrayList<String> pileCoups;
-   private Map<String, Integer[]> hashJ1 =  new HashMap<String, Integer[]>() ;
-   private Map<String, Integer[]> hashJ2 =  new HashMap<String, Integer[]>() ;
+   private Map<String, Integer[]> hashJ1 =  new HashMap<String, Integer[]>() ; // table de Hash de J1 (horizontal)
+   private Map<String, Integer[]> hashJ2 =  new HashMap<String, Integer[]>() ; // table de Hash de J2 (Vertical)
 
     /** Le Player Min
      *  (l'adversaire) */
@@ -59,7 +59,7 @@ public class AlphaBetaV2 implements IAlgo {
     
     private String idHashTable;
 
-    private int timeMax = 2000;
+    private int timeMax = 2000; // Temps max de reflexion de l'algo (+/- 1 seconde le temps de l'arreter) 
     private ArrayList<String> pileCoup = new ArrayList<String>();
 
 
@@ -154,8 +154,8 @@ public class AlphaBetaV2 implements IAlgo {
             }catch(Exception e) {
             	System.out.println("Catch");
             	System.out.println(MeilleurCoup);
-                System.out.println("Profondeur : " + current_prof);
-                System.out.println("Dure coup en ms : " + (elapsedTime - startTime));
+                //System.out.println("Profondeur : " + current_prof);
+                //System.out.println("Dure coup en ms : " + (elapsedTime - startTime));
 
             	return MeilleurCoup; 
             }
@@ -167,8 +167,8 @@ public class AlphaBetaV2 implements IAlgo {
     	}
     	
     	System.out.println(MeilleurCoup);
-        System.out.println("Profondeur : " + current_prof);
-        System.out.println("Dure coup en ms : " + (elapsedTime - startTime));
+        //System.out.println("Profondeur : " + current_prof);
+        //System.out.println("Dure coup en ms : " + (elapsedTime - startTime));
 
     	return MeilleurCoup; 
     }
@@ -176,7 +176,7 @@ public class AlphaBetaV2 implements IAlgo {
     
     
     
-    
+    //MaxMin de alphaBeta
     public int maxMin (int current_prof, SquadroBoard p, int alpah, int beta) {
        //System.out.println("maxMin!");
     	boolean recalcule = false;
@@ -271,7 +271,7 @@ public class AlphaBetaV2 implements IAlgo {
     }
     
     
-    
+    //MinMax de alphaBeta
     public int minMax (int current_prof, SquadroBoard p, int alpah, int beta) {
        // System.out.println("minMax");
   //      p.possibleMoves(this.PlayerMax).size();

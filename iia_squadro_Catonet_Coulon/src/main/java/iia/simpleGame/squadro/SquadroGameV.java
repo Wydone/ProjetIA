@@ -16,12 +16,6 @@ public class SquadroGameV extends ASquadroGame {
     public SquadroGameV(){
     	
     	super(); 
-    	  
-    	//Initialisation des joueurs avec les algos avec lesquels on veut pouvoir jouer 
-    //	this.me = new Player("Me", myRole, new Minimax(myRole, enemyRole));
-    	
-    	//this.enemy = new Player("Enemy", enemyRole, new Minimax(enemyRole, myRole)); 
-    	
     	
     	//Algo alphabeta
     	this.me = new Player("Me", myRole, new AlphaBetaV2(this,myRole, enemyRole));
@@ -33,6 +27,9 @@ public class SquadroGameV extends ASquadroGame {
    
     }
 
+    /*
+     * Cette version pour recupperer l'heuristique n'est pas à utiliser
+     */
     //NE PAS UTILISER !!!
     @Override
     public int getValue(String role) {
@@ -45,35 +42,42 @@ public class SquadroGameV extends ASquadroGame {
         if(role.equals("VERTICAL")) {
         	
         	h = this.getBoard().nbCoupRestantAvantVictoire(enemyRole) - this.getBoard().nbCoupRestantAvantVictoire(myRole) ;  
-        	System.out.println("MAX   VVVVVVVVVVVVVVVVVVVVV : " + h);
         	
         }else { //if role = Horizontal
         	h = this.getBoard().nbCoupRestantAvantVictoire(enemyRole) - this.getBoard().nbCoupRestantAvantVictoire(myRole) ;  
-        	System.out.println("MIN    ------------------------------------------------------ : " + h);
-        }
-        
+        	
+        } 
     	
         return h;
     }
     
-    //A UTILISER !!
+    /*
+     * Heuritique qui commpare mon nombre de coups restant et le nombre de coups restant pour l'adversaire avant de gagner
+     *	@param Role , SquadroBoard
+     *	@return int heurisitique
+     */
+    // A UTILISER
     public int getValue(String role, SquadroBoard b) {
         int h ; 
         
         if(role.equals("HORIZONTAL")) {
         	
         	h = b.nbCoupRestantAvantVictoire(enemyRole) - b.nbCoupRestantAvantVictoire(myRole) ;  
-        	//System.out.println("MAX   VVVVVVVVVVVVVVVVVVVVV : " + h);
+        
         	
-        }else { //if role = Horizontal
-        	//ici
+        }else {
+        	
         	h = b.nbCoupRestantAvantVictoire(myRole) - b.nbCoupRestantAvantVictoire(enemyRole) ;  
-        	//System.out.println("MIN    ------------------------------------------------------ : " + h);
+        	
         }
         
     	
         return h;
     }
+    
+    //----------------------------------------------------------
+    // GETTER & SETTER 
+    //----------------------------------------------------------
     
     public String getEnemyRole() {
     	return enemyRole;
