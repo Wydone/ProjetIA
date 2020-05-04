@@ -11,8 +11,8 @@ public class PlaySquadro {
     public static void main(String[] args) {
         System.out.println("Hello world !");
         
-        ChallengerSquadro c1 = new ChallengerSquadro(); 
-        ChallengerSquadro c2 = new ChallengerSquadro(); 
+        MyChallenger c1 = new MyChallenger(); 
+        MyChallenger c2 = new MyChallenger(); 
         c1.setRole("HORIZONTAL");
         c2.setRole("VERTICAL");
        

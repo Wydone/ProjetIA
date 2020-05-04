@@ -10,7 +10,7 @@ import iia.simpleGame.base.AGame;
 import iia.simpleGame.base.IChallenger;
 import iia.simpleGame.base.Player;
 
-public class ChallengerSquadro implements IChallenger{
+public class MyChallenger implements IChallenger{
 	
 	//Notre joueur challenger
 	private String my_role ;
@@ -43,7 +43,7 @@ public class ChallengerSquadro implements IChallenger{
 	
 	
 	//Comme le prof l'a dit, faire l'initialisation dans setRole
-	public ChallengerSquadro() {
+	public MyChallenger() {
 		
 	}
 	
